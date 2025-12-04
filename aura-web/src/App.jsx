@@ -1,5 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+
+import LandingLayout from "./layouts/LandingLayout";
+import DeveloperLayout from "./layouts/DevLayout";
+import ClientLayout from "./layouts/ClientLayout";
 
 import LandingPage from "./routes/public/LandingPage";
 
@@ -17,52 +21,43 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Public */}
-          <Route path="/" element={<LandingPage />} />
+          {/* Landing / marketing / docs */}
+          <Route element={<LandingLayout />}>
+            <Route path="/" element={<LandingPage />} />
+          </Route>
 
-          {/* Auth */}
+          {/* Auth pages (no dashboard chrome) */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
-          {/* Client */}
+          {/* Developer area */}
           <Route
-            path="/client/*"
-            element={
-              <ProtectedRoute allowedRoles={["client"]}>
-                <ClientRoutes />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* Developer */}
-          <Route
-            path="/dev/*"
+            path="/dev"
             element={
               <ProtectedRoute allowedRoles={["developer"]}>
-                <DevRoutes />
+                <DeveloperLayout />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            {/* <Route path="dashboard" element={<DevDashboard />} /> */}
+          </Route>
+
+          {/* Client area */}
+          <Route
+            path="/client"
+            element={
+              <ProtectedRoute allowedRoles={["client"]}>
+                <ClientLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            {/* <Route path="dashboard" element={<ClientDashboard />} /> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-  );
-}
-
-// Nested routes components
-function ClientRoutes() {
-  return (
-    <Routes>
-      <Route path="dashboard" element={<ClientDashboard />} />
-    </Routes>
-  );
-}
-
-function DevRoutes() {
-  return (
-    <Routes>
-      <Route path="dashboard" element={<DevDashboard />} />
-    </Routes>
   );
 }
 
