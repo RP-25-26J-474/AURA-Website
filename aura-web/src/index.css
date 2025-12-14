@@ -47,7 +47,7 @@
   --color-base-100: oklch(20.84% 0.008 17.911);
   --color-base-200: oklch(18.522% 0.007 17.911);
   --color-base-300: oklch(16.203% 0.007 17.911);
-  --color-base-content: oklch(83.768% 0.001 17.911);
+  --color-base-content: oklch(0.997 0.001 17.911);
   --color-primary: oklch(68.628% 0.185 148.958);
   --color-primary-content: oklch(0% 0 0);
   --color-secondary: oklch(69.776% 0.135 168.327);
@@ -72,4 +72,19 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
+}
+
+.page-exit {
+  animation: fadeOut 300ms ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
 }
