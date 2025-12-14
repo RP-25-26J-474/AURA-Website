@@ -1,16 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import ThemeButton from "./ThemeButton";
+import { logos } from "../../assets";
 
 export default function Navbar({
   brand = "AURA",
+  slogan = "Unlease the future of UI",
   menuItems = [],
   rightItems = [],
 }) {
   const { user, logout } = useAuth();
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-4">
+    <div className="navbar bg-base-300 shadow-sm px-4 py-4">
       {/* LEFT: brand + mobile menu */}
       <div className="navbar-start">
         {/* Mobile dropdown */}
@@ -31,7 +33,7 @@ export default function Navbar({
           {/* Mobile dropdown content */}
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-200 rounded-box w-52"
           >
             {menuItems.map((item) =>
               item.children ? (
@@ -57,20 +59,24 @@ export default function Navbar({
         </div>
 
         {/* BRAND */}
-        <Link to="/" className="btn btn-ghost text-xl font-bold">
-          {brand}
+        <Link to="/" className="btn btn-ghost text-xl font-bold items-center gap-2">
+          <img src={logos.aura} alt="AURA" className="h-8" />
+          <div className="flex flex-row items-center gap-2">
+            <span className="mb-1">{brand}</span>
+            <span className="hidden md:inline text-xs opacity-70">{slogan}</span>
+          </div>
         </Link>
       </div>
 
       {/* CENTER: desktop menu */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 md:gap-4">
           {menuItems.map((item) =>
             item.children ? (
               <li key={item.label}>
                 <details>
                   <summary>{item.label}</summary>
-                  <ul className="p-2 bg-base-100 w-40">
+                  <ul className="p-2 bg-base-200 w-40">
                     {item.children.map((sub) => (
                       <li key={sub.label}>
                         <NavLink to={sub.to}>{sub.label}</NavLink>
@@ -95,14 +101,14 @@ export default function Navbar({
             <span className="hidden md:inline text-sm opacity-70">
               Hi, {user.name}
             </span>
-            <button onClick={logout} className="btn btn-sm">
+            <button onClick={logout} className="btn btn-md">
               Logout
             </button>
           </>
         ) : (
           <>
             {rightItems.map((btn) => (
-              <Link key={btn.label} to={btn.to} className="btn btn-sm">
+              <Link key={btn.label} to={btn.to} className="btn btn-md">
                 {btn.label}
               </Link>
             ))}

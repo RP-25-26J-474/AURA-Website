@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import PageContainer from "../../components/layout/PageContainer";
+import { PageSection } from "../../components/layout/PageSection";
 
 function LandingPage() {
   return (
-    <div>LandingPage</div>
-  )
+    <PageContainer>
+      <PageSection>LandingPage</PageSection>
+    </PageContainer>
+  );
 }
 
-export default LandingPage
+export default LandingPage;
