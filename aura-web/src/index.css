@@ -88,3 +88,10 @@
     transform: scale(0.98);
   }
 }
+
+.glass-effect {
+  background:rgba(8, 8, 8, 0.8); /* Transparent white */
+  backdrop-filter: blur(10px); /* Blurred glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  z-index: 1000; /* Ensures it's above other elements */
+}

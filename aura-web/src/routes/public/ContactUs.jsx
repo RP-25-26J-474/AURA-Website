@@ -16,10 +16,13 @@ function ContactUs() {
         />
       </div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
-          Contact Us
-        </h2>
-        <p className="mt-2 text-lg/8 text-gray-400">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-lg font-semibold text-primary">Contact Us</h2>
+          <p className="mt-2 text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
+            Get in Touch with AURA
+          </p>
+        </div>
+        <p className="mt-2 text-lg/8 text-base-content/75">
           We'd love to hear from you! Whether you have questions about AURA,
           need
         </p>
@@ -27,7 +30,7 @@ function ContactUs() {
       <form
         action="#"
         method="POST"
-        className="mx-auto mt-16 max-w-xl sm:mt-20"
+        className="mx-auto mt-8 max-w-xl sm:mt-12"
       >
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <label for="first-name" className="input w-full">
@@ -99,7 +102,7 @@ function ContactUs() {
               name="message"
               placeholder="Message"
               rows="4"
-              className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
+              className="textarea w-full"
             ></textarea>
           </div>
           <div className="flex gap-x-4 sm:col-span-2">
@@ -128,9 +131,7 @@ function ContactUs() {
           </div>
         </div>
         <div className="mt-10">
-          <button
-            type="submit"
-            className="btn btn-primary w-full">
+          <button type="submit" className="btn btn-primary w-full">
             Let's talk
           </button>
         </div>

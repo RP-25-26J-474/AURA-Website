@@ -80,7 +80,7 @@ export default function Pricing() {
 
       {/* Heading */}
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="text-base font-semibold text-primary">Pricing</h2>
+        <h2 className="text-lg font-semibold text-primary">Pricing</h2>
         <p className="mt-2 text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
           Choose the right AURA Dev plan
         </p>
@@ -92,10 +92,10 @@ export default function Pricing() {
       </p>
 
       {/* Plans grid */}
-      <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
+      <div className="mx-auto mt-8 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-12 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
         {plans.map((plan) => (
           <div key={plan.id} className={plan.cardClass}>
-            <h3 id={plan.id} className="text-base font-semibold text-indigo-400">
+            <h3 id={plan.id} className="text-base font-semibold text-secondary">
               {plan.name}
             </h3>
 
@@ -111,7 +111,7 @@ export default function Pricing() {
             <ul role="list" className="mt-8 space-y-3 text-sm text-base-content/75 sm:mt-10">
               {plan.features.map((feature) => (
                 <li key={feature} className="flex gap-x-3">
-                  <CheckIcon className="text-indigo-400" />
+                  <CheckIcon className="text-secondary" />
                   {feature}
                 </li>
               ))}

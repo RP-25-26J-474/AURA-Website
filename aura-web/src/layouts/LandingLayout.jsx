@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 
 export default function LandingLayout() {
   return (
@@ -19,7 +20,7 @@ export default function LandingLayout() {
           { label: "Contact Us", to: "/contact-us" },
         ]}
         rightItems={[
-          { label: "Login", to: "/login", className: "btn btn-secondary" },
+          { label: "Login", to: "/login", className: "btn border border-primary/75" },
           { label: "Register", to: "/register", className: "btn btn-primary" },
         ]}
       />
@@ -27,6 +28,8 @@ export default function LandingLayout() {
       <main className="flex-1">
         <Outlet />
       </main>
+
+      <Footer />
     </div>
   );
 }
