@@ -7,6 +7,8 @@ import ClientLayout from "./layouts/ClientLayout";
 
 import LandingPage from "./routes/public/LandingPage";
 import Pricing from "./routes/public/Pricing";
+import DocsLayout from "./routes/docs/DocsLayout";
+import DocsContent from "./routes/docs/DocsContent";
 
 import LoginPage from "./routes/auth/LoginPage";
 import RegisterPage from "./routes/auth/RegisterPage";
@@ -26,6 +28,11 @@ function App() {
           <Route element={<LandingLayout />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/pricing" element={<Pricing />} />
+
+            <Route path="/docs" element={<DocsLayout />}>
+              <Route index element={<DocsContent />} />
+              <Route path="*" element={<DocsContent />} />
+            </Route>
           </Route>
 
           {/* Auth pages (no dashboard chrome) */}
