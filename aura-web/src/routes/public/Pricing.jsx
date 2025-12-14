@@ -63,7 +63,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="relative isolate bg-base-100 px-6 py-24 sm:py-32 lg:px-8 -z-10">
+    <div className="relative isolate bg-base-100 px-6 py-12 sm:py-20 lg:px-8 -z-10">
       {/* Background gradient blur */}
       <div
         aria-hidden="true"

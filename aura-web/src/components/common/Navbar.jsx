@@ -12,7 +12,7 @@ export default function Navbar({
   const { user, logout } = useAuth();
 
   return (
-    <div className="navbar bg-base-300 shadow-sm px-4 py-4">
+    <div className="navbar bg-base-300 shadow-sm px-4 py-4 sticky top-0 z-50">
       {/* LEFT: brand + mobile menu */}
       <div className="navbar-start">
         {/* Mobile dropdown */}
@@ -108,7 +108,7 @@ export default function Navbar({
         ) : (
           <>
             {rightItems.map((btn) => (
-              <Link key={btn.label} to={btn.to} className="btn btn-md">
+              <Link key={btn.label} to={btn.to} className={btn.className}>
                 {btn.label}
               </Link>
             ))}

@@ -16,10 +16,11 @@ export default function LandingLayout() {
               { label: "Components", to: "/docs/components" },
             ],
           },
+          { label: "Contact Us", to: "/contact-us" },
         ]}
         rightItems={[
-          { label: "Login", to: "/login" },
-          { label: "Register", to: "/register" },
+          { label: "Login", to: "/login", className: "btn btn-secondary" },
+          { label: "Register", to: "/register", className: "btn btn-primary" },
         ]}
       />
 
