@@ -52,7 +52,7 @@ function App() {
             }
           >
             <Route index element={<Navigate to="dashboard" replace />} />
-            {/* <Route path="dashboard" element={<DevDashboard />} /> */}
+            <Route path="dashboard" element={<DevDashboard />} />
           </Route>
 
           {/* Client area */}
