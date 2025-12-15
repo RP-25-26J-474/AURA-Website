@@ -6,6 +6,10 @@ import DeveloperLayout from "./layouts/DevLayout";
 import ClientLayout from "./layouts/ClientLayout";
 
 import LandingPage from "./routes/public/LandingPage";
+import Pricing from "./routes/public/Pricing";
+import DocsLayout from "./routes/docs/DocsLayout";
+import DocsContent from "./routes/docs/DocsContent";
+import ContactUs from "./routes/public/ContactUs";
 
 import LoginPage from "./routes/auth/LoginPage";
 import RegisterPage from "./routes/auth/RegisterPage";
@@ -24,6 +28,14 @@ function App() {
           {/* Landing / marketing / docs */}
           <Route element={<LandingLayout />}>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/pricing" element={<Pricing />} />
+
+            <Route path="/docs" element={<DocsLayout />}>
+              <Route index element={<DocsContent />} />
+              <Route path="*" element={<DocsContent />} />
+            </Route>
+
+            <Route path="/contact-us" element={<ContactUs />} />
           </Route>
 
           {/* Auth pages (no dashboard chrome) */}
@@ -40,7 +52,7 @@ function App() {
             }
           >
             <Route index element={<Navigate to="dashboard" replace />} />
-            {/* <Route path="dashboard" element={<DevDashboard />} /> */}
+            <Route path="dashboard" element={<DevDashboard />} />
           </Route>
 
           {/* Client area */}
@@ -53,7 +65,7 @@ function App() {
             }
           >
             <Route index element={<Navigate to="dashboard" replace />} />
-            {/* <Route path="dashboard" element={<ClientDashboard />} /> */}
+            <Route path="dashboard" element={<ClientDashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>
