@@ -65,7 +65,7 @@ function App() {
             }
           >
             <Route index element={<Navigate to="dashboard" replace />} />
-            {/* <Route path="dashboard" element={<ClientDashboard />} /> */}
+            <Route path="dashboard" element={<ClientDashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>

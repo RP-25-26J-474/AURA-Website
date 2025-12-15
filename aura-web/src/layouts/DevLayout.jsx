@@ -13,7 +13,7 @@ export default function DevLayout() {
           <Link to="/" className="flex items-center gap-2">
             <img src={logos.aura} alt="AURA Logo" className="h-6 w-auto" />
             <span className="font-semibold tracking-tight text-sm">
-              AURA Dev
+              Developer Console
             </span>
           </Link>
         </div>
