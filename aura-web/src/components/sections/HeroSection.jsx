@@ -8,9 +8,9 @@ function HeroSection() {
     "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)";
 
   return (
-    <div className="bg-base-100 min-h-screen">
+    <div className="bg-base-100 min-h-[calc(100svh-4.5rem)]">
       {/* Hero */}
-      <div className="relative isolate px-6 py-12 lg:px-8">
+      <div className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         {/* Top gradient blob */}
         <div
           aria-hidden="true"
@@ -22,9 +22,9 @@ function HeroSection() {
           />
         </div>
 
-        <div className="mx-auto max-w-3xl py-12 sm:py-24 lg:py-36">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm/6 text-base-content/75 ring-1 ring-base-content/50 hover:ring-white/20">
+        <div className="mx-auto flex w-full max-w-4xl flex-col items-center">
+          <div className="mb-8 sm:flex sm:w-full sm:justify-center">
+            <div className="relative rounded-full px-3 py-1 text-xs md:text-sm/6 text-base-content/75 ring-1 ring-base-content/50 hover:ring-white/20">
               Research in progress | {" "}
               <a href="#" className="font-semibold text-indigo-400">
                 <span aria-hidden="true" className="absolute inset-0" />
@@ -34,20 +34,20 @@ function HeroSection() {
           </div>
 
           <div className="text-center">
-            <h1 className="text-5xl font-semibold tracking-tight text-balance text-base-content sm:text-7xl">
+            <h1 className="text-5xl font-semibold md:tracking-tight text-balance text-base-content sm:text-6xl lg:text-7xl">
               Build Adaptive User Experiences with{" "}
               <span className="text-primary font-bold">AURA</span>
             </h1>
-            <p className="mt-8 text-lg font-medium text-pretty text-base-content/75 sm:text-xl/8">
+            <p className="mt-6 text-base font-medium text-pretty text-base-content/75 sm:mt-8 sm:text-lg lg:text-xl/8">
               Leverage AURA's React components and personalization platform to
               create accessible, adaptive experiences that resonate with your users.
             </p>
 
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a href="#" className="btn btn-primary btn-lg">
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10 sm:flex-row sm:gap-x-6">
+              <a href="#" className="btn btn-primary sm:btn-lg">
                 Get started
               </a>
-              <a href="#" className="btn btn-ghost btn-lg">
+              <a href="#" className="btn btn-ghost sm:btn-lg">
                 Learn more <span aria-hidden="true"><FaArrowRight/></span>
               </a>
             </div>
