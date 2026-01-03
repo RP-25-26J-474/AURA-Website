@@ -45,7 +45,7 @@ function AboutSection() {
         />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20 lg:px-8">
+      <div className="mx-auto max-w-5xl xl:max-w-7xl px-6 py-16 sm:py-20 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary/80">

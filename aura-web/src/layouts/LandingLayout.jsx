@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
+import label from "daisyui/components/label";
 
 export default function LandingLayout() {
   return (
@@ -9,6 +10,7 @@ export default function LandingLayout() {
         brand="AURA"
         menuItems={[
           { label: "Home", to: "/" },
+          { label: "Research", to: "/research" },
           { label: "Pricing", to: "/pricing" },
           {
             label: "Docs",

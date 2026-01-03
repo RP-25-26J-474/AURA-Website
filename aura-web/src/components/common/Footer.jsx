@@ -4,8 +4,8 @@ import { logos } from "../../assets";
 function Footer() {
   return (
     <>
-      <footer className="bg-base-200/10 text-base-content">
-        <div className="footer mx-auto w-full max-w-7xl gap-10 px-6 py-12 sm:footer-horizontal">
+      <footer className="bg-base-200 text-base-content z-10">
+        <div className="footer mx-auto w-full max-w-5xl xl:max-w-7xl gap-10 px-6 py-12 sm:footer-horizontal">
           <aside className="max-w-sm">
             <div className="flex items-center gap-4">
               <img src={logos.aura} alt="AURA Logo" className="h-10 w-auto md:h-14" />

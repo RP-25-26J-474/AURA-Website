@@ -26,7 +26,7 @@ function HeroSection() {
           <div className="mb-8 sm:flex sm:w-full sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-xs md:text-sm/6 text-base-content/75 ring-1 ring-base-content/50 hover:ring-white/20">
               Research in progress | {" "}
-              <a href="#" className="font-semibold text-indigo-400">
+              <a href="/research" className="font-semibold text-indigo-400">
                 <span aria-hidden="true" className="absolute inset-0" />
                 Read more
               </a>
