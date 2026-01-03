@@ -1,36 +1,9 @@
 import React from "react";
 import { vectors } from "../../assets";
+import { featureCards, quickStats } from "../../constants";
 
 function AboutSection() {
   const clipPathPolygon = vectors.blobClipPath();
-  const featureCards = [
-    {
-      title: "Adaptive by design",
-      description:
-        "AURA learns from behavior and context to refine components in real time without sacrificing performance.",
-    },
-    {
-      title: "Accessible defaults",
-      description:
-        "Built-in guardrails keep layouts readable, navigable, and inclusive across devices and abilities.",
-    },
-    {
-      title: "Composable system",
-      description:
-        "Drop in React primitives or scale to full journeys with flexible tokens and reusable patterns.",
-    },
-    {
-      title: "Insightful analytics",
-      description:
-        "Measure intent, engagement, and friction points with clear dashboards that drive iteration.",
-    },
-  ];
-
-  const quickStats = [
-    { value: "10+", label: "Adaptive components" },
-    { value: "24/7", label: "Behavioral monitoring" },
-    { value: "5x", label: "Faster experiment cycles" },
-  ];
 
   return (
     <section className="relative isolate bg-base-200">
