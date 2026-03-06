@@ -12,16 +12,28 @@ export function useSettings() {
 
 export function SettingsProvider({ children, userId = 'u_001' }) {
   const DEFAULT_SETTINGS = {
-    font_size: 'medium',
+    font_size: 16,
     target_size: 32,
     line_height: 1.5,
     theme: 'light',
     contrast_mode: 'normal',
-    element_spacing: 'normal'
+    element_spacing: 8
   };
 
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
-  const [frozenSettings, setFrozenSettings] = useState(DEFAULT_SETTINGS);
+  const CACHE_KEY = `aura_settings_${userId}`;
+
+  // Initialize from localStorage cache immediately (for fast startup)
+  const getCachedSettings = () => {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) return JSON.parse(cached);
+    } catch (e) { /* ignore */ }
+    return null;
+  };
+
+  const cachedOnStartup = getCachedSettings();
+  const [settings, setSettings] = useState({ ...DEFAULT_SETTINGS, ...(cachedOnStartup || {}) });
+  const [frozenSettings, setFrozenSettings] = useState({ ...DEFAULT_SETTINGS, ...(cachedOnStartup || {}) });
   const [isPreviewEnabled, setIsPreviewEnabled] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -53,6 +65,12 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         };
 
         console.log('📥 Backend settings:', { baseSettings, rlSettings, mergedSettings });
+
+        // Save merged settings to localStorage cache for fast startup
+        const cacheKey = `aura_settings_${userId}`;
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify({ ...DEFAULT_SETTINGS, ...mergedSettings }));
+        } catch (e) { /* ignore storage errors */ }
 
         setSettings(prev => ({
           ...prev,
@@ -88,20 +106,24 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
       return;
     }
 
-    // Font Size - Use !important to override Tailwind
-    if (newSettings.font_size) {
-      const fontSizeMap = {
-        'small': '14px',
-        'medium': '16px',
-        'large': '18px',
-        'x-large': '20px'
-      };
-      const size = fontSizeMap[newSettings.font_size] || newSettings.font_size;
+    // Font Size - handle both numeric (16) and legacy string ('medium') values
+    if (newSettings.font_size !== undefined && newSettings.font_size !== null) {
+      let size;
+      if (typeof newSettings.font_size === 'number') {
+        size = `${newSettings.font_size}px`;
+      } else {
+        // Legacy string fallback
+        const fontSizeMap = {
+          'small': '14px',
+          'medium': '16px',
+          'large': '18px',
+          'x-large': '20px'
+        };
+        size = fontSizeMap[newSettings.font_size] || '16px';
+      }
 
-      // Remove existing fontSize style and re-apply with !important
       const style = document.createElement('style');
       style.id = 'rl-fontSize-override';
-      // Remove old style if exists
       const oldStyle = document.getElementById('rl-fontSize-override');
       if (oldStyle) oldStyle.remove();
 
@@ -277,47 +299,41 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
   const updateSetting = (parameter, value) => {
     console.log(`✨ Updating ${parameter} to ${value}`);
 
-    // Update state first
     setSettings(prev => {
-      const updated = {
-        ...prev,
-        [parameter]: value
-      };
+      const updated = { ...prev, [parameter]: value };
+      // Persist to localStorage so settings survive reload and sync to other apps
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify(updated)); } catch (e) { }
       return updated;
     });
 
-    // Visual feedback - flash effect
     document.body.style.transition = 'opacity 0.3s';
     document.body.style.opacity = '0.8';
-    setTimeout(() => {
-      document.body.style.opacity = '1';
-    }, 300);
+    setTimeout(() => { document.body.style.opacity = '1'; }, 300);
   };
 
   const updateMultipleSettings = (newSettings) => {
     console.log('✨ Updating multiple settings:', newSettings);
 
-    setSettings(prev => ({
-      ...prev,
-      ...newSettings
-    }));
+    setSettings(prev => {
+      const updated = { ...prev, ...newSettings };
+      // Persist to localStorage
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify(updated)); } catch (e) { }
+      return updated;
+    });
 
-    // Visual feedback - flash effect
     document.body.style.transition = 'opacity 0.3s';
     document.body.style.opacity = '0.7';
-    setTimeout(() => {
-      document.body.style.opacity = '1';
-    }, 300);
+    setTimeout(() => { document.body.style.opacity = '1'; }, 300);
   };
 
   const resetSettings = () => {
     setSettings({
-      font_size: 'medium',
+      font_size: 16,
       target_size: 32,
       line_height: 1.5,
       theme: 'light',
       contrast_mode: 'normal',
-      element_spacing: 'normal'
+      element_spacing: 8
     });
   };
 
@@ -327,7 +343,6 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
       updateSetting,
       updateMultipleSettings,
       resetSettings,
-      reloadSettings: loadUserSettings,
       reloadSettings: loadUserSettings,
       isLoaded,
       isPreviewEnabled,

@@ -301,7 +301,7 @@ function getInitialUserId() {
   const params = new URLSearchParams(window.location.search);
   const fromQuery = params.get('userId');
   const stored = window.localStorage.getItem('aura_user_id');
-  return (fromQuery || stored || 'guest').trim();
+  return (fromQuery || stored || 'u_001').trim();
 }
 
 function App() {

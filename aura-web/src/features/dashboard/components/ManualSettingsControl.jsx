@@ -147,10 +147,10 @@ function ManualSettingsControl({ userId, onSettingChange }) {
                   onChange={(e) => handleManualChange('font_size', e.target.value)}
                   disabled={isSaving}
                 >
-                  <option value="small">Small (14px)</option>
-                  <option value="medium">Medium (16px)</option>
-                  <option value="large">Large (18px)</option>
-                  <option value="x-large">X-Large (20px)</option>
+                  <option value={14}>Small (14px)</option>
+                  <option value={16}>Medium (16px)</option>
+                  <option value={18}>Large (18px)</option>
+                  <option value={20}>X-Large (20px)</option>
                 </select>
               </div>
 
