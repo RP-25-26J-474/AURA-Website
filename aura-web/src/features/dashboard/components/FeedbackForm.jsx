@@ -10,7 +10,7 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
     rating: 5,
     feedbackType: 'positive',
     comment: '',
-    parameter: 'targetSize',
+    parameter: 'target_size',
     currentValue: null
   });
 
@@ -109,7 +109,7 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
       rating: 5,
       feedbackType: 'positive',
       comment: '',
-      parameter: 'targetSize',
+      parameter: 'target_size',
       currentValue: null
     });
     setIsOpen(false);
@@ -208,12 +208,12 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
                   value={formData.parameter}
                   onChange={(e) => setFormData(prev => ({ ...prev, parameter: e.target.value, currentValue: null }))}
                 >
-                  <option value="targetSize">🎯 Button Size</option>
-                  <option value="fontSize">🔤 Font Size</option>
-                  <option value="lineHeight">📏 Line Height</option>
+                  <option value="target_size">🎯 Button Size</option>
+                  <option value="font_size">🔤 Font Size</option>
+                  <option value="line_height">📏 Line Height</option>
                   <option value="theme">🎨 Theme (Light/Dark)</option>
-                  <option value="contrastMode">🔆 Contrast Mode</option>
-                  <option value="elementSpacing">↔️ Element Spacing</option>
+                  <option value="contrast_mode">🔆 Contrast Mode</option>
+                  <option value="element_spacing">↔️ Element Spacing</option>
                 </select>
               </div>
 

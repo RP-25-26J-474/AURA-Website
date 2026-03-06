@@ -12,12 +12,12 @@ export function useSettings() {
 
 export function SettingsProvider({ children, userId = 'u_001' }) {
   const DEFAULT_SETTINGS = {
-    fontSize: 'medium',
-    targetSize: 32,
-    lineHeight: 1.5,
+    font_size: 'medium',
+    target_size: 32,
+    line_height: 1.5,
     theme: 'light',
-    contrastMode: 'normal',
-    elementSpacing: 'normal'
+    contrast_mode: 'normal',
+    element_spacing: 'normal'
   };
 
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
@@ -38,7 +38,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
 
   const loadUserSettings = async () => {
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.origin + '/api');
       const response = await fetch(`${API_BASE_URL}/users/${userId}`);
       const data = await response.json();
 
@@ -89,14 +89,14 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
     }
 
     // Font Size - Use !important to override Tailwind
-    if (newSettings.fontSize) {
+    if (newSettings.font_size) {
       const fontSizeMap = {
         'small': '14px',
         'medium': '16px',
         'large': '18px',
         'x-large': '20px'
       };
-      const size = fontSizeMap[newSettings.fontSize] || newSettings.fontSize;
+      const size = fontSizeMap[newSettings.font_size] || newSettings.font_size;
 
       // Remove existing fontSize style and re-apply with !important
       const style = document.createElement('style');
@@ -115,8 +115,8 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
     }
 
     // Target/Button Size
-    if (newSettings.targetSize) {
-      const size = Number(newSettings.targetSize);
+    if (newSettings.target_size) {
+      const size = Number(newSettings.target_size);
 
       const style = document.createElement('style');
       style.id = 'rl-targetSize-override';
@@ -134,8 +134,8 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
     }
 
     // Line Height
-    if (newSettings.lineHeight) {
-      const lineHeight = Number(newSettings.lineHeight);
+    if (newSettings.line_height) {
+      const lineHeight = Number(newSettings.line_height);
 
       const style = document.createElement('style');
       style.id = 'rl-lineHeight-override';
@@ -161,15 +161,15 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
     }
 
     // Contrast Mode
-    if (newSettings.contrastMode) {
-      document.documentElement.setAttribute('data-contrast', newSettings.contrastMode);
+    if (newSettings.contrast_mode) {
+      document.documentElement.setAttribute('data-contrast', newSettings.contrast_mode);
 
       const style = document.createElement('style');
       style.id = 'rl-contrast-override';
       const oldStyle = document.getElementById('rl-contrast-override');
       if (oldStyle) oldStyle.remove();
 
-      if (newSettings.contrastMode === 'high') {
+      if (newSettings.contrast_mode === 'high') {
         style.textContent = `
           body {
             filter: contrast(1.5) !important;
@@ -177,17 +177,17 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         `;
         document.head.appendChild(style);
       }
-      console.log(`✅ Applied contrastMode: ${newSettings.contrastMode}`);
+      console.log(`✅ Applied contrast_mode: ${newSettings.contrast_mode}`);
     }
 
     // Element Spacing
-    if (newSettings.elementSpacing) {
+    if (newSettings.element_spacing) {
       const spacingMap = {
         compact: '0.25rem',
         normal: '0.5rem',
         spacious: '1rem'
       };
-      const spacing = spacingMap[newSettings.elementSpacing] || '0.5rem';
+      const spacing = spacingMap[newSettings.element_spacing] || '0.5rem';
 
       const style = document.createElement('style');
       style.id = 'rl-spacing-override';
@@ -204,21 +204,21 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
     }
 
     // Branding Colors
-    if (newSettings.primaryColor) {
-      document.documentElement.style.setProperty('--p', hexToHsl(newSettings.primaryColor));
-      console.log(`✅ Applied primaryColor: ${newSettings.primaryColor}`);
+    if (newSettings.primary_color) {
+      document.documentElement.style.setProperty('--p', hexToHsl(newSettings.primary_color));
+      console.log(`✅ Applied primaryColor: ${newSettings.primary_color}`);
     }
-    if (newSettings.secondaryColor) {
-      document.documentElement.style.setProperty('--s', hexToHsl(newSettings.secondaryColor));
-      console.log(`✅ Applied secondaryColor: ${newSettings.secondaryColor}`);
+    if (newSettings.secondary_color) {
+      document.documentElement.style.setProperty('--s', hexToHsl(newSettings.secondary_color));
+      console.log(`✅ Applied secondaryColor: ${newSettings.secondary_color}`);
     }
-    if (newSettings.accentColor) {
-      document.documentElement.style.setProperty('--a', hexToHsl(newSettings.accentColor));
-      console.log(`✅ Applied accentColor: ${newSettings.accentColor}`);
+    if (newSettings.accent_color) {
+      document.documentElement.style.setProperty('--a', hexToHsl(newSettings.accent_color));
+      console.log(`✅ Applied accentColor: ${newSettings.accent_color}`);
     }
 
     // Reduced Motion
-    if (newSettings.reducedMotion) {
+    if (newSettings.reduced_motion) {
       const style = document.createElement('style');
       style.id = 'rl-motion-override';
       const oldStyle = document.getElementById('rl-motion-override');
@@ -312,12 +312,12 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
 
   const resetSettings = () => {
     setSettings({
-      fontSize: 'medium',
-      targetSize: 32,
-      lineHeight: 1.5,
+      font_size: 'medium',
+      target_size: 32,
+      line_height: 1.5,
       theme: 'light',
-      contrastMode: 'normal',
-      elementSpacing: 'normal'
+      contrast_mode: 'normal',
+      element_spacing: 'normal'
     });
   };
 

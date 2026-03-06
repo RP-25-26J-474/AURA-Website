@@ -28,19 +28,18 @@ function ManualSettingsControl({ userId, onSettingChange }) {
 
       await updateManualSettings(userId, {
         enabled: true,
-        fontSize: nextSettings.fontSize,
-        lineHeight: nextSettings.lineHeight,
-        contrast: nextSettings.contrastMode,
-        spacing: nextSettings.elementSpacing,
-        targetSize: nextSettings.targetSize,
+        font_size: nextSettings.font_size,
+        line_height: nextSettings.line_height,
+        contrast_mode: nextSettings.contrast_mode,
+        element_spacing: nextSettings.element_spacing,
+        target_size: nextSettings.target_size,
         theme: nextSettings.theme,
-        theme: nextSettings.theme,
-        reducedMotion: nextSettings.reducedMotion ?? false,
-        tooltipAssist: nextSettings.tooltipAssist ?? false,
-        layoutSimplification: nextSettings.layoutSimplification ?? false,
-        primaryColor: nextSettings.primaryColor,
-        secondaryColor: nextSettings.secondaryColor,
-        accentColor: nextSettings.accentColor
+        reduced_motion: nextSettings.reduced_motion ?? false,
+        tooltip_assist: nextSettings.tooltip_assist ?? false,
+        layout_simplification: nextSettings.layout_simplification ?? false,
+        primary_color: nextSettings.primary_color,
+        secondary_color: nextSettings.secondary_color,
+        accent_color: nextSettings.accent_color
       });
 
       // Send to backend as implicit positive feedback
@@ -140,12 +139,12 @@ function ManualSettingsControl({ userId, onSettingChange }) {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-semibold">Font Size</span>
-                  <span className="label-text-alt">Current: {settings.fontSize}</span>
+                  <span className="label-text-alt">Current: {settings.font_size}</span>
                 </label>
                 <select
                   className="select select-bordered w-full"
-                  value={settings.fontSize}
-                  onChange={(e) => handleManualChange('fontSize', e.target.value)}
+                  value={settings.font_size}
+                  onChange={(e) => handleManualChange('font_size', e.target.value)}
                   disabled={isSaving}
                 >
                   <option value="small">Small (14px)</option>
@@ -159,15 +158,15 @@ function ManualSettingsControl({ userId, onSettingChange }) {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-semibold">Button Size</span>
-                  <span className="label-text-alt">Current: {settings.targetSize}px</span>
+                  <span className="label-text-alt">Current: {settings.target_size}px</span>
                 </label>
                 <input
                   type="range"
                   min="24"
                   max="48"
                   step="4"
-                  value={settings.targetSize}
-                  onChange={(e) => handleManualChange('targetSize', Number(e.target.value))}
+                  value={settings.target_size}
+                  onChange={(e) => handleManualChange('target_size', Number(e.target.value))}
                   className="range range-primary"
                   disabled={isSaving}
                 />
@@ -183,15 +182,15 @@ function ManualSettingsControl({ userId, onSettingChange }) {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-semibold">Line Height</span>
-                  <span className="label-text-alt">Current: {settings.lineHeight}</span>
+                  <span className="label-text-alt">Current: {settings.line_height}</span>
                 </label>
                 <input
                   type="range"
                   min="1.2"
                   max="2.0"
                   step="0.1"
-                  value={settings.lineHeight}
-                  onChange={(e) => handleManualChange('lineHeight', Number(e.target.value))}
+                  value={settings.line_height}
+                  onChange={(e) => handleManualChange('line_height', Number(e.target.value))}
                   className="range range-primary"
                   disabled={isSaving}
                 />
@@ -231,19 +230,19 @@ function ManualSettingsControl({ userId, onSettingChange }) {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-semibold">Contrast Mode</span>
-                  <span className="label-text-alt">Current: {settings.contrastMode}</span>
+                  <span className="label-text-alt">Current: {settings.contrast_mode}</span>
                 </label>
                 <div className="join w-full">
                   <button
-                    className={`btn join-item flex-1 ${settings.contrastMode === 'normal' ? 'btn-active' : 'btn-outline'}`}
-                    onClick={() => handleManualChange('contrastMode', 'normal')}
+                    className={`btn join-item flex-1 ${settings.contrast_mode === 'normal' ? 'btn-active' : 'btn-outline'}`}
+                    onClick={() => handleManualChange('contrast_mode', 'normal')}
                     disabled={isSaving}
                   >
                     Normal
                   </button>
                   <button
-                    className={`btn join-item flex-1 ${settings.contrastMode === 'high' ? 'btn-active' : 'btn-outline'}`}
-                    onClick={() => handleManualChange('contrastMode', 'high')}
+                    className={`btn join-item flex-1 ${settings.contrast_mode === 'high' ? 'btn-active' : 'btn-outline'}`}
+                    onClick={() => handleManualChange('contrast_mode', 'high')}
                     disabled={isSaving}
                   >
                     High
@@ -255,26 +254,26 @@ function ManualSettingsControl({ userId, onSettingChange }) {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-semibold">Element Spacing</span>
-                  <span className="label-text-alt">Current: {settings.elementSpacing}</span>
+                  <span className="label-text-alt">Current: {settings.element_spacing}</span>
                 </label>
                 <div className="join w-full">
                   <button
-                    className={`btn join-item flex-1 ${settings.elementSpacing === 'compact' ? 'btn-active' : 'btn-outline'}`}
-                    onClick={() => handleManualChange('elementSpacing', 'compact')}
+                    className={`btn join-item flex-1 ${settings.element_spacing === 'compact' ? 'btn-active' : 'btn-outline'}`}
+                    onClick={() => handleManualChange('element_spacing', 'compact')}
                     disabled={isSaving}
                   >
                     Compact
                   </button>
                   <button
-                    className={`btn join-item flex-1 ${settings.elementSpacing === 'normal' ? 'btn-active' : 'btn-outline'}`}
-                    onClick={() => handleManualChange('elementSpacing', 'normal')}
+                    className={`btn join-item flex-1 ${settings.element_spacing === 'normal' ? 'btn-active' : 'btn-outline'}`}
+                    onClick={() => handleManualChange('element_spacing', 'normal')}
                     disabled={isSaving}
                   >
                     Normal
                   </button>
                   <button
-                    className={`btn join-item flex-1 ${settings.elementSpacing === 'spacious' ? 'btn-active' : 'btn-outline'}`}
-                    onClick={() => handleManualChange('elementSpacing', 'spacious')}
+                    className={`btn join-item flex-1 ${settings.element_spacing === 'spacious' ? 'btn-active' : 'btn-outline'}`}
+                    onClick={() => handleManualChange('element_spacing', 'spacious')}
                     disabled={isSaving}
                   >
                     Spacious
@@ -291,8 +290,8 @@ function ManualSettingsControl({ userId, onSettingChange }) {
                   <input
                     type="checkbox"
                     className="toggle toggle-primary"
-                    checked={settings.reducedMotion || false}
-                    onChange={(e) => handleManualChange('reducedMotion', e.target.checked)}
+                    checked={settings.reduced_motion || false}
+                    onChange={(e) => handleManualChange('reduced_motion', e.target.checked)}
                     disabled={isSaving}
                   />
                 </label>
@@ -304,8 +303,8 @@ function ManualSettingsControl({ userId, onSettingChange }) {
                   <input
                     type="checkbox"
                     className="toggle toggle-primary"
-                    checked={settings.tooltipAssist || false}
-                    onChange={(e) => handleManualChange('tooltipAssist', e.target.checked)}
+                    checked={settings.tooltip_assist || false}
+                    onChange={(e) => handleManualChange('tooltip_assist', e.target.checked)}
                     disabled={isSaving}
                   />
                 </label>
@@ -317,8 +316,8 @@ function ManualSettingsControl({ userId, onSettingChange }) {
                   <input
                     type="checkbox"
                     className="toggle toggle-primary"
-                    checked={settings.layoutSimplification || false}
-                    onChange={(e) => handleManualChange('layoutSimplification', e.target.checked)}
+                    checked={settings.layout_simplification || false}
+                    onChange={(e) => handleManualChange('layout_simplification', e.target.checked)}
                     disabled={isSaving}
                   />
                 </label>
@@ -335,8 +334,8 @@ function ManualSettingsControl({ userId, onSettingChange }) {
                   <input
                     type="color"
                     className="h-10 w-full cursor-pointer rounded-lg border border-base-300"
-                    value={settings.primaryColor || '#007bff'}
-                    onChange={(e) => handleManualChange('primaryColor', e.target.value)}
+                    value={settings.primary_color || '#007bff'}
+                    onChange={(e) => handleManualChange('primary_color', e.target.value)}
                     disabled={isSaving}
                   />
                 </div>
@@ -347,8 +346,8 @@ function ManualSettingsControl({ userId, onSettingChange }) {
                   <input
                     type="color"
                     className="h-10 w-full cursor-pointer rounded-lg border border-base-300"
-                    value={settings.secondaryColor || '#6c757d'}
-                    onChange={(e) => handleManualChange('secondaryColor', e.target.value)}
+                    value={settings.secondary_color || '#6c757d'}
+                    onChange={(e) => handleManualChange('secondary_color', e.target.value)}
                     disabled={isSaving}
                   />
                 </div>
@@ -359,8 +358,8 @@ function ManualSettingsControl({ userId, onSettingChange }) {
                   <input
                     type="color"
                     className="h-10 w-full cursor-pointer rounded-lg border border-base-300"
-                    value={settings.accentColor || '#28a745'}
-                    onChange={(e) => handleManualChange('accentColor', e.target.value)}
+                    value={settings.accent_color || '#28a745'}
+                    onChange={(e) => handleManualChange('accent_color', e.target.value)}
                     disabled={isSaving}
                   />
                 </div>
