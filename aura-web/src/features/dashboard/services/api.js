@@ -26,14 +26,14 @@ export async function fetchUserData(userId) {
 
 export async function applySettings(userId, settings, source = 'manual') {
   try {
-    const response = await axios.post(`${API_BASE_URL}/users/${userId}/settings`, {
+    // POST to the SSE-broadcasting settings endpoint so Novacart tabs update in real-time
+    const response = await axios.post(`${API_BASE_URL}/settings/${userId}`, {
       settings,
       source
     });
-    return response.data.data;
+    return response.data.profile || settings;
   } catch (error) {
     console.error('Error applying settings:', error);
-    // For development, simulate success
     return settings;
   }
 }
@@ -101,8 +101,12 @@ export async function fetchTrialPreferences(userId) {
 
 export async function updateManualSettings(userId, settings) {
   try {
-    const response = await axios.put(`${API_BASE_URL}/manual-settings/${userId}`, settings);
-    return response.data;
+    // Use the SSE-broadcasting settings endpoint so Novacart tabs update in real-time
+    const response = await axios.post(`${API_BASE_URL}/settings/${userId}`, {
+      settings,
+      source: 'dashboard'
+    });
+    return response.data.profile || settings;
   } catch (error) {
     console.error('Error updating manual settings:', error);
     throw error;

@@ -42,6 +42,41 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
     loadUserSettings();
   }, [userId]);
 
+  // Subscribe to real-time settings changes via SSE (receives changes from Novacart feedback)
+  useEffect(() => {
+    const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.origin + '/api');
+    const url = `${API_BASE_URL}/settings/events/${userId}`;
+    let es = null;
+    let retryTimer = null;
+
+    function connect() {
+      es = new EventSource(url);
+      es.onmessage = (e) => {
+        try {
+          const data = JSON.parse(e.data);
+          if (data.type === 'settings_update' && data.settings) {
+            setSettings(prev => {
+              const updated = { ...prev, ...data.settings };
+              try { localStorage.setItem(CACHE_KEY, JSON.stringify(updated)); } catch {}
+              return updated;
+            });
+            console.log('[Dashboard SSE] Settings received from:', data.source);
+          }
+        } catch {}
+      };
+      es.onerror = () => {
+        es.close();
+        retryTimer = setTimeout(connect, 5000);
+      };
+    }
+
+    connect();
+    return () => {
+      if (es) es.close();
+      if (retryTimer) clearTimeout(retryTimer);
+    };
+  }, [userId]);
+
   // Apply initial settings on mount
   useEffect(() => {
     console.log('🚀 Initial mount - applying default settings');
@@ -51,20 +86,14 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
   const loadUserSettings = async () => {
     try {
       const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.origin + '/api');
-      const response = await fetch(`${API_BASE_URL}/users/${userId}`);
+      // Use the settings endpoint (GET /api/settings/:userId) which reads from UserSettings collection
+      const response = await fetch(`${API_BASE_URL}/settings/${userId}`);
       const data = await response.json();
 
-      if (data.success && data.data) {
-        // Merge current settings with RL suggestions (RL takes priority)
-        const baseSettings = data.data.currentSettings || {};
-        const rlSettings = data.data.rlSuggestedSettings || {};
+      if (data.found && data.profile) {
+        const mergedSettings = data.profile;
 
-        const mergedSettings = {
-          ...baseSettings,
-          ...rlSettings
-        };
-
-        console.log('📥 Backend settings:', { baseSettings, rlSettings, mergedSettings });
+        console.log('📥 Backend settings:', mergedSettings);
 
         // Save merged settings to localStorage cache for fast startup
         const cacheKey = `aura_settings_${userId}`;
@@ -77,7 +106,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
           ...mergedSettings
         }));
 
-        console.log('✅ Loaded and merged user settings from backend');
+        console.log('✅ Loaded user settings from DB');
       }
       setIsLoaded(true);
     } catch (error) {
