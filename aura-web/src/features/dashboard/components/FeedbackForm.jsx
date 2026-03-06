@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FiMessageCircle, FiStar, FiSmile, FiMeh, FiFrown, FiZap } from 'react-icons/fi';
 import { submitFeedback, updateUserSettings } from '../services/api';
 import { useSettings } from '../contexts/SettingsContext';
 
@@ -42,14 +43,14 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
         }
       };
 
-      console.log('📤 Submitting feedback:', feedbackData);
+      console.log('[Feedback] Submitting feedback:', feedbackData);
       const result = await submitFeedback(userId, feedbackData);
-      console.log('📥 Received result:', result);
+      console.log('[Feedback] Received result:', result);
 
       // Auto-apply RL suggestion if available
       if (result.data?.nextSuggestion) {
         const suggestion = result.data.nextSuggestion;
-        console.log('✨ Auto-applying RL suggestion:', suggestion.suggestedValue);
+        console.log('[Feedback] Auto-applying RL suggestion:', suggestion.suggestedValue);
 
         // First update local settings for immediate feedback
         updateSetting(formData.parameter, suggestion.suggestedValue);
@@ -57,7 +58,7 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
         // Then reload from backend to ensure we have the latest RL suggestions
         setTimeout(async () => {
           await reloadSettings();
-          console.log('🔄 Reloaded settings from backend');
+          console.log('[Feedback] Reloaded settings from backend');
         }, 500);
 
         // Show success message with what was changed
@@ -130,14 +131,14 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
         onClick={() => setIsOpen(true)}
         className="btn btn-primary gap-2 shadow-lg"
       >
-        💬 Give Feedback
+        <FiMessageCircle /> Give Feedback
       </button>
 
       {isOpen && (
         <div className="modal modal-open">
           <div className="modal-box max-w-2xl">
             <h3 className="font-bold text-2xl mb-4 flex items-center gap-2">
-              💬 Share Your Feedback
+              <FiMessageCircle /> Share Your Feedback
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -155,16 +156,16 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
                       className={`text-5xl transition-transform hover:scale-110 ${star <= formData.rating ? 'opacity-100' : 'opacity-30'
                         }`}
                     >
-                      {star <= formData.rating ? '⭐' : '☆'}
+                      <FiStar className={star <= formData.rating ? 'text-warning' : 'text-base-content/40'} />
                     </button>
                   ))}
                 </div>
                 <div className="text-center text-sm opacity-70">
-                  {formData.rating === 5 && '😊 Excellent!'}
-                  {formData.rating === 4 && '😃 Good!'}
-                  {formData.rating === 3 && '😐 Okay'}
-                  {formData.rating === 2 && '😕 Could be better'}
-                  {formData.rating === 1 && '😞 Needs improvement'}
+                  {formData.rating === 5 && 'Excellent'}
+                  {formData.rating === 4 && 'Good'}
+                  {formData.rating === 3 && 'Okay'}
+                  {formData.rating === 2 && 'Could be better'}
+                  {formData.rating === 1 && 'Needs improvement'}
                 </div>
               </div>
 
@@ -179,21 +180,21 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
                     className={`btn join-item flex-1 ${formData.feedbackType === 'positive' ? 'btn-success' : 'btn-outline'}`}
                     onClick={() => setFormData(prev => ({ ...prev, feedbackType: 'positive' }))}
                   >
-                    😊 Positive
+                    <FiSmile /> Positive
                   </button>
                   <button
                     type="button"
                     className={`btn join-item flex-1 ${formData.feedbackType === 'neutral' ? 'btn-warning' : 'btn-outline'}`}
                     onClick={() => setFormData(prev => ({ ...prev, feedbackType: 'neutral' }))}
                   >
-                    😐 Neutral
+                    <FiMeh /> Neutral
                   </button>
                   <button
                     type="button"
                     className={`btn join-item flex-1 ${formData.feedbackType === 'negative' ? 'btn-error' : 'btn-outline'}`}
                     onClick={() => setFormData(prev => ({ ...prev, feedbackType: 'negative' }))}
                   >
-                    😞 Negative
+                    <FiFrown /> Negative
                   </button>
                 </div>
               </div>
@@ -208,12 +209,12 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
                   value={formData.parameter}
                   onChange={(e) => setFormData(prev => ({ ...prev, parameter: e.target.value, currentValue: null }))}
                 >
-                  <option value="target_size">🎯 Button Size</option>
-                  <option value="font_size">🔤 Font Size</option>
-                  <option value="line_height">📏 Line Height</option>
-                  <option value="theme">🎨 Theme (Light/Dark)</option>
-                  <option value="contrast_mode">🔆 Contrast Mode</option>
-                  <option value="element_spacing">↔️ Element Spacing</option>
+                  <option value="target_size">Button Size</option>
+                  <option value="font_size">Font Size</option>
+                  <option value="line_height">Line Height</option>
+                  <option value="theme">Theme (Light/Dark)</option>
+                  <option value="contrast_mode">Contrast Mode</option>
+                  <option value="element_spacing">Element Spacing</option>
                 </select>
               </div>
 
@@ -225,8 +226,8 @@ function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
                 <div className="alert alert-info">
                   <div className="flex-1">
                     <span>Current {formData.parameter}: <strong className="text-lg">{formData.currentValue || getCurrentValue(formData.parameter)}</strong></span>
-                    <div className="text-xs mt-1 opacity-70">
-                      ✨ This value is applied to the entire dashboard
+                    <div className="text-xs mt-1 opacity-70 flex items-center gap-1">
+                      <FiZap /> This value is applied to the entire dashboard
                     </div>
                   </div>
                 </div>

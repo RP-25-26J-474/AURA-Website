@@ -1,10 +1,11 @@
 import React from 'react';
+import { FiFileText, FiCpu, FiEdit3, FiSettings, FiArrowRight, FiRotateCcw, FiCheck } from 'react-icons/fi';
 
 function HistoryTimeline({ history, currentIndex, onRevert }) {
   if (history.length === 0) {
     return (
       <div className="text-center py-12">
-        <div className="text-6xl mb-4">📝</div>
+        <div className="text-6xl mb-4 flex justify-center"><FiFileText /></div>
         <h3 className="text-xl font-semibold mb-2">No changes yet</h3>
         <p className="text-base-content/60">Your change history will appear here</p>
       </div>
@@ -13,9 +14,9 @@ function HistoryTimeline({ history, currentIndex, onRevert }) {
 
   const getSourceBadge = (source) => {
     const badges = {
-      ml: { class: 'badge-primary', icon: '🤖', label: 'ML' },
-      manual: { class: 'badge-secondary', icon: '✋', label: 'Manual' },
-      system: { class: 'badge-accent', icon: '⚙️', label: 'System' }
+      ml: { class: 'badge-primary', icon: <FiCpu />, label: 'ML' },
+      manual: { class: 'badge-secondary', icon: <FiEdit3 />, label: 'Manual' },
+      system: { class: 'badge-accent', icon: <FiSettings />, label: 'System' }
     };
     const badge = badges[source] || badges.system;
     return <span className={`badge ${badge.class} gap-1`}>{badge.icon} {badge.label}</span>;
@@ -83,7 +84,7 @@ function HistoryTimeline({ history, currentIndex, onRevert }) {
                             {String(history[index - 1].settings[key])}
                           </span>
                         )}
-                        <span className="opacity-50">→</span>
+                        <span className="opacity-50"><FiArrowRight /></span>
                         <span className="text-success font-medium">
                           {String(item.settings[key])}
                         </span>
@@ -105,11 +106,11 @@ function HistoryTimeline({ history, currentIndex, onRevert }) {
                     onClick={() => onRevert(index)}
                     title="Revert to this version"
                   >
-                    ↶ Revert to this version
+                    <FiRotateCcw /> Revert to this version
                   </button>
                 ) : (
                   <div className="alert alert-success py-2">
-                    <span className="text-sm">✓ Current State</span>
+                    <span className="text-sm flex items-center gap-1"><FiCheck /> Current State</span>
                   </div>
                 )}
               </div>

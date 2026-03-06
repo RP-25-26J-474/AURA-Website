@@ -79,7 +79,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
 
   // Apply initial settings on mount
   useEffect(() => {
-    console.log('🚀 Initial mount - applying default settings');
+    console.log('[Settings] Initial mount - applying default settings');
     applyAllSettings(settings);
   }, []);
 
@@ -93,7 +93,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
       if (data.found && data.profile) {
         const mergedSettings = data.profile;
 
-        console.log('📥 Backend settings:', mergedSettings);
+        console.log('[Settings] Backend settings:', mergedSettings);
 
         // Save merged settings to localStorage cache for fast startup
         const cacheKey = `aura_settings_${userId}`;
@@ -106,7 +106,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
           ...mergedSettings
         }));
 
-        console.log('✅ Loaded user settings from DB');
+        console.log('[Settings] Loaded user settings from DB');
       }
       setIsLoaded(true);
     } catch (error) {
@@ -117,7 +117,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
 
   // Apply settings to DOM whenever they change OR preview mode changes
   useEffect(() => {
-    console.log('🔄 Settings/Preview changed, applying to DOM');
+    console.log('[Settings] Settings/Preview changed, applying to DOM');
     if (isPreviewEnabled) {
       applyAllSettings(settings);
     } else {
@@ -127,11 +127,11 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
   }, [settings, isPreviewEnabled, frozenSettings]);
 
   const applyAllSettings = (newSettings) => {
-    console.log('🎨 Applying all settings to website:', newSettings);
+    console.log('[Settings] Applying all settings to website:', newSettings);
 
     // Ensure DOM is ready
     if (!document.body) {
-      console.warn('⚠️ DOM not ready, skipping settings application');
+      console.warn('[Settings] DOM not ready, skipping settings application');
       return;
     }
 
@@ -162,7 +162,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         }
       `;
       document.head.appendChild(style);
-      console.log(`✅ Applied fontSize: ${size}`);
+      console.log(`[Settings] Applied fontSize: ${size}`);
     }
 
     // Target/Button Size
@@ -181,7 +181,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         }
       `;
       document.head.appendChild(style);
-      console.log(`✅ Applied targetSize: ${size}px`);
+      console.log(`[Settings] Applied targetSize: ${size}px`);
     }
 
     // Line Height
@@ -199,7 +199,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         }
       `;
       document.head.appendChild(style);
-      console.log(`✅ Applied lineHeight: ${lineHeight}`);
+      console.log(`[Settings] Applied lineHeight: ${lineHeight}`);
     }
 
     // Theme - DaisyUI requires 'data-theme' on html element
@@ -208,7 +208,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
       html.setAttribute('data-theme', newSettings.theme);
       // Force DaisyUI theme refresh
       html.className = html.className; // Trigger re-render
-      console.log(`✅ Applied theme: ${newSettings.theme}`);
+      console.log(`[Settings] Applied theme: ${newSettings.theme}`);
     }
 
     // Contrast Mode
@@ -228,7 +228,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         `;
         document.head.appendChild(style);
       }
-      console.log(`✅ Applied contrast_mode: ${newSettings.contrast_mode}`);
+      console.log(`[Settings] Applied contrast_mode: ${newSettings.contrast_mode}`);
     }
 
     // Element Spacing
@@ -251,21 +251,21 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         }
       `;
       document.head.appendChild(style);
-      console.log(`✅ Applied elementSpacing: ${spacing}`);
+      console.log(`[Settings] Applied elementSpacing: ${spacing}`);
     }
 
     // Branding Colors
     if (newSettings.primary_color) {
       document.documentElement.style.setProperty('--p', hexToHsl(newSettings.primary_color));
-      console.log(`✅ Applied primaryColor: ${newSettings.primary_color}`);
+      console.log(`[Settings] Applied primaryColor: ${newSettings.primary_color}`);
     }
     if (newSettings.secondary_color) {
       document.documentElement.style.setProperty('--s', hexToHsl(newSettings.secondary_color));
-      console.log(`✅ Applied secondaryColor: ${newSettings.secondary_color}`);
+      console.log(`[Settings] Applied secondaryColor: ${newSettings.secondary_color}`);
     }
     if (newSettings.accent_color) {
       document.documentElement.style.setProperty('--a', hexToHsl(newSettings.accent_color));
-      console.log(`✅ Applied accentColor: ${newSettings.accent_color}`);
+      console.log(`[Settings] Applied accentColor: ${newSettings.accent_color}`);
     }
 
     // Reduced Motion
@@ -284,13 +284,13 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
         }
       `;
       document.head.appendChild(style);
-      console.log('✅ Applied reducedMotion: true');
+      console.log('[Settings] Applied reducedMotion: true');
     } else {
       const oldStyle = document.getElementById('rl-motion-override');
       if (oldStyle) oldStyle.remove();
     }
 
-    console.log('✅ All settings applied successfully');
+    console.log('[Settings] All settings applied successfully');
   };
 
   // Helper to convert Hex to HSL for DaisyUI
@@ -326,7 +326,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
   };
 
   const updateSetting = (parameter, value) => {
-    console.log(`✨ Updating ${parameter} to ${value}`);
+    console.log(`[Settings] Updating ${parameter} to ${value}`);
 
     setSettings(prev => {
       const updated = { ...prev, [parameter]: value };
@@ -341,7 +341,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
   };
 
   const updateMultipleSettings = (newSettings) => {
-    console.log('✨ Updating multiple settings:', newSettings);
+    console.log('[Settings] Updating multiple settings:', newSettings);
 
     setSettings(prev => {
       const updated = { ...prev, ...newSettings };
@@ -377,7 +377,7 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
       isPreviewEnabled,
       setIsPreviewEnabled: (enabled) => {
         if (!enabled) {
-          console.log('❄️ Freezing settings for dashboard preview off');
+          console.log('[Settings] Freezing settings for dashboard preview off');
           setFrozenSettings(settings);
         }
         setIsPreviewEnabled(enabled);

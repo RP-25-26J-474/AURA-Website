@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiSettings, FiZap } from 'react-icons/fi';
 import { useSettings } from '../contexts/SettingsContext';
 
 function SettingsDisplay() {
@@ -7,7 +8,7 @@ function SettingsDisplay() {
   return (
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
-        <h2 className="card-title text-xl">⚙️ Active Settings (Live)</h2>
+        <h2 className="card-title text-xl flex items-center gap-2"><FiSettings /> Active Settings (Live)</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div className="stat bg-base-200 rounded-lg p-4">
             <div className="stat-title">Font Size</div>
@@ -41,7 +42,7 @@ function SettingsDisplay() {
         </div>
 
         <div className="alert alert-success mt-4">
-          <span>✨ These settings are applied to the entire website in real-time!</span>
+          <span className="flex items-center gap-2"><FiZap /> These settings are applied to the entire website in real-time!</span>
         </div>
       </div>
     </div>

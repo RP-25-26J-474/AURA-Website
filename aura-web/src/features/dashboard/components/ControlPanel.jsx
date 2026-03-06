@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiSliders, FiRotateCcw, FiRotateCw, FiDownload, FiTrash2, FiFilter, FiCpu, FiEdit3, FiSettings } from 'react-icons/fi';
 
 function ControlPanel({ 
   canUndo, 
@@ -16,7 +17,7 @@ function ControlPanel({
         <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-              🎮 Controls
+              <FiSliders /> Controls
             </h3>
             <div className="flex flex-wrap gap-2">
               <button
@@ -25,7 +26,7 @@ function ControlPanel({
                 disabled={!canUndo}
                 title="Undo last change (Ctrl+Z)"
               >
-                ↶ Undo
+                <FiRotateCcw /> Undo
               </button>
               <button
                 className="btn btn-secondary btn-sm"
@@ -33,28 +34,28 @@ function ControlPanel({
                 disabled={!canRedo}
                 title="Redo change (Ctrl+Y)"
               >
-                ↷ Redo
+                <FiRotateCw /> Redo
               </button>
               <button
                 className="btn btn-success btn-sm"
                 onClick={onExport}
                 title="Export history as JSON"
               >
-                📥 Export
+                <FiDownload /> Export
               </button>
               <button
                 className="btn btn-error btn-sm"
                 onClick={onClear}
                 title="Clear all history"
               >
-                🗑️ Clear History
+                <FiTrash2 /> Clear History
               </button>
             </div>
           </div>
 
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-              🔍 Filter
+              <FiFilter /> Filter
             </h3>
             <div className="join">
               <button
@@ -67,19 +68,19 @@ function ControlPanel({
                 className={`btn btn-sm join-item ${filterType === 'ml' ? 'btn-active' : 'btn-ghost'}`}
                 onClick={() => onFilterChange('ml')}
               >
-                🤖 ML
+                <FiCpu /> ML
               </button>
               <button
                 className={`btn btn-sm join-item ${filterType === 'manual' ? 'btn-active' : 'btn-ghost'}`}
                 onClick={() => onFilterChange('manual')}
               >
-                ✋ Manual
+                <FiEdit3 /> Manual
               </button>
               <button
                 className={`btn btn-sm join-item ${filterType === 'system' ? 'btn-active' : 'btn-ghost'}`}
                 onClick={() => onFilterChange('system')}
               >
-                ⚙️ System
+                <FiSettings /> System
               </button>
             </div>
           </div>
