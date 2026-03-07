@@ -1,6 +1,25 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+
+/**
+ * Notify the AURA extension (if installed) about a settings change.
+ * The extension broadcasts to all tabs, giving novacart instant updates
+ * even when SSE isn't connected.
+ */
+function notifyExtension(userId, settings) {
+  try {
+    window.postMessage({
+      type: 'AURA_EXT_SET_ADAPTIVE_PROFILE',
+      source: 'aura-web',
+      profile: {
+        user_id: userId,
+        metadata: { origin: 'user', created_at: new Date().toISOString(), confidence_overall: 1, version: 1 },
+        profile: settings,
+      },
+    }, '*');
+  } catch { /* extension not available */ }
+}
 
 export async function fetchUserData(userId) {
   try {
@@ -31,6 +50,8 @@ export async function applySettings(userId, settings, source = 'manual') {
       settings,
       source
     });
+    // Also push to extension so all tabs get notified via PING-PONG
+    notifyExtension(userId, response.data.profile || settings);
     return response.data.profile || settings;
   } catch (error) {
     console.error('Error applying settings:', error);
@@ -106,6 +127,8 @@ export async function updateManualSettings(userId, settings) {
       settings,
       source: 'dashboard'
     });
+    // Also push to extension so all tabs get notified via PING-PONG
+    notifyExtension(userId, response.data.profile || settings);
     return response.data.profile || settings;
   } catch (error) {
     console.error('Error updating manual settings:', error);
