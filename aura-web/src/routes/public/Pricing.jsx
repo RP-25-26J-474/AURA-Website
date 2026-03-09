@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 
+const stats = [
+  { label: "Competitive advantage", value: "~90%", note: "No direct end-to-end competitors" },
+  { label: "Deployment model", value: "Client-side", note: "Most processing via browser extension" },
+  { label: "Integration effort", value: "< 5 min", note: "Standard React + NPM ecosystem" },
+];
+
 function Check() {
   return (
     <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 flex-none text-primary mt-0.5" aria-hidden="true">
@@ -48,6 +54,19 @@ export default function Pricing() {
         <p className="mt-6 text-lg text-base-content/60 max-w-2xl mx-auto">
           AURA is free for end users and developers. Websites that want to integrate with the AURA extension in production need a registered website license.
         </p>
+      </section>
+
+      {/* ── Market stats ────────────────────────────────── */}
+      <section className="border-y border-base-300 bg-base-200">
+        <div className="mx-auto max-w-5xl px-6 py-10 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <p className="text-4xl font-bold text-primary">{s.value}</p>
+              <p className="mt-1 text-sm font-semibold text-base-content">{s.label}</p>
+              <p className="text-xs text-base-content/40 mt-0.5">{s.note}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ── How it works ─────────────────────────────────── */}
