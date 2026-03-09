@@ -45,7 +45,7 @@ function TrialInsights({ userId }) {
     }
 
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-3">
         {entries.map(([key, value]) => (
           <div key={key} className="stat bg-base-200 rounded-lg p-3">
             <div className="stat-title">{key}</div>

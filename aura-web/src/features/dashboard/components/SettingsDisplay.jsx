@@ -9,7 +9,7 @@ function SettingsDisplay() {
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
         <h2 className="card-title text-xl flex items-center gap-2"><FiSettings /> Active Settings (Live)</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           <div className="stat bg-base-200 rounded-lg p-4">
             <div className="stat-title">Font Size</div>
             <div className="stat-value text-2xl">{settings.font_size}</div>

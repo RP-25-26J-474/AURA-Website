@@ -14,7 +14,7 @@ function ControlPanel({
   return (
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
-        <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
+          <div className="flex flex-row gap-6 items-center justify-between">
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
               <FiSliders /> Controls

@@ -110,7 +110,7 @@ function FeedbackHistory({ userId, refreshKey }) {
   const getStatusBadge = (status) => {
     const badges = {
       applied: { class: 'badge-success', text: 'Applied', icon: <FiCheck /> },
-      pending: { class: 'badge-warning', text: 'Pending', icon: <FiClock /> },
+      pending: { class: 'badge-ghost', text: 'Pending', icon: <FiClock /> },
       acknowledged: { class: 'badge-info', text: 'Acknowledged', icon: <FiEye /> },
       ignored: { class: 'badge-error', text: 'Ignored', icon: <FiX /> }
     };
@@ -120,7 +120,7 @@ function FeedbackHistory({ userId, refreshKey }) {
   const getImpactBadge = (impact) => {
     const badges = {
       high: { class: 'badge-error', text: 'High' },
-      medium: { class: 'badge-warning', text: 'Medium' },
+      medium: { class: 'badge-ghost', text: 'Medium' },
       low: { class: 'badge-success', text: 'Low' }
     };
     return badges[impact] || badges.low;
@@ -132,7 +132,7 @@ function FeedbackHistory({ userId, refreshKey }) {
         {Array.from({ length: 5 }).map((_, index) => (
           <FiStar
             key={index}
-            className={index < rating ? 'text-warning' : 'text-base-content/40'}
+            className={index < rating ? 'text-base-content' : 'text-base-content/40'}
           />
         ))}
       </div>
@@ -181,16 +181,16 @@ function FeedbackHistory({ userId, refreshKey }) {
   return (
     <div className="space-y-6">
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         <div className="card bg-base-200 shadow">
           <div className="card-body p-4 text-center">
-            <div className="text-3xl font-bold text-primary">{stats.total}</div>
+            <div className="text-3xl font-bold text-base-content">{stats.total}</div>
             <div className="text-sm opacity-70">Total Feedback</div>
           </div>
         </div>
         <div className="card bg-base-200 shadow">
           <div className="card-body p-4 text-center">
-            <div className="text-3xl font-bold text-warning flex items-center justify-center gap-2"><FiStar /> {stats.avgRating}</div>
+            <div className="text-3xl font-bold text-base-content flex items-center justify-center gap-2"><FiStar /> {stats.avgRating}</div>
             <div className="text-sm opacity-70">Avg Rating</div>
           </div>
         </div>
@@ -202,7 +202,7 @@ function FeedbackHistory({ userId, refreshKey }) {
         </div>
         <div className="card bg-base-200 shadow">
           <div className="card-body p-4 text-center">
-            <div className="text-3xl font-bold text-info">{stats.pending}</div>
+            <div className="text-3xl font-bold text-base-content">{stats.pending}</div>
             <div className="text-sm opacity-70">Pending</div>
           </div>
         </div>
@@ -220,7 +220,7 @@ function FeedbackHistory({ userId, refreshKey }) {
               {stats.positive > 0 && `${stats.positive} Positive`}
             </div>
             <div 
-              className="bg-warning flex items-center justify-center text-xs font-semibold text-warning-content"
+              className="bg-base-300 flex items-center justify-center text-xs font-semibold text-base-content"
               style={{ width: `${(stats.neutral / stats.total) * 100}%` }}
             >
               {stats.neutral > 0 && `${stats.neutral} Neutral`}
@@ -297,7 +297,7 @@ function FeedbackHistory({ userId, refreshKey }) {
                 )}
 
                 {!feedback.processed && (
-                  <div className="alert alert-warning py-2">
+                  <div className="alert bg-base-200 py-2">
                     <span className="text-xs">Feedback received - processing pending</span>
                   </div>
                 )}

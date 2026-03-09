@@ -16,7 +16,7 @@ function ComparisonView({ currentSettings, previousSettings }) {
   return (
     <div className="max-h-[600px] overflow-y-auto">
       {hasChanges && previousSettings ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <div className="card bg-base-200">
             <div className="card-body p-4">
               <h4 className="font-semibold mb-3 flex items-center gap-2">

@@ -16,7 +16,7 @@ function UserInfo({ userId, userData, onUserChange }) {
   return (
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="avatar placeholder">
               <div className="bg-primary text-primary-content rounded-full w-16">
@@ -36,7 +36,7 @@ function UserInfo({ userId, userData, onUserChange }) {
               </p>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-3">
             <label className="input input-bordered flex items-center gap-2">
               <span className="text-xs uppercase text-base-content/60">Use user</span>
               <input

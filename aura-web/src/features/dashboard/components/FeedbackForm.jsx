@@ -1,279 +1,278 @@
 import React, { useState } from 'react';
-import { FiMessageCircle, FiStar, FiSmile, FiMeh, FiFrown, FiZap } from 'react-icons/fi';
-import { submitFeedback, updateUserSettings } from '../services/api';
+import { FiMessageCircle, FiSmile, FiMeh, FiFrown, FiZap } from 'react-icons/fi';
+import { submitFeedback } from '../services/api';
 import { useSettings } from '../contexts/SettingsContext';
+
+const STAR_LABELS = { 1: 'Needs improvement', 2: 'Could be better', 3: 'Okay', 4: 'Good', 5: 'Excellent' };
+
+const S = {
+  overlay: {
+    position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.45)',
+    backdropFilter: 'blur(2px)', zIndex: 9999,
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+  },
+  panel: {
+    width: 560, minWidth: 560, maxHeight: '88vh', backgroundColor: '#111111',
+    borderRadius: 12, border: '2px solid #005317',
+    boxShadow: '0 0 60px rgba(0,83,23,0.18)', display: 'flex', flexDirection: 'column',
+    fontFamily: 'system-ui, -apple-system, "Segoe UI", sans-serif',
+  },
+  panelHeader: {
+    padding: '18px 24px', borderBottom: '1px solid rgba(0,83,23,0.2)',
+    display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0,
+  },
+  badge: {
+    fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+    color: '#005317', backgroundColor: 'transparent', padding: '3px 8px', borderRadius: 4, marginRight: 10, border: '1px solid #005317',
+  },
+  title: { fontSize: 15, fontWeight: 600, color: '#f1f5f9', margin: 0 },
+  closeBtn: {
+    background: 'none', border: 'none', cursor: 'pointer',
+    fontSize: 22, color: '#94a3b8', lineHeight: 1, padding: '0 2px',
+    display: 'flex', alignItems: 'center',
+  },
+  body: { padding: '20px 24px', overflowY: 'auto', flex: 1 },
+  footer: {
+    padding: '14px 24px', borderTop: '1px solid rgba(0,83,23,0.2)',
+    display: 'flex', justifyContent: 'flex-end', gap: 8, flexShrink: 0,
+  },
+  sectionLabel: {
+    fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+    color: '#94a3b8', margin: '16px 0 8px 0',
+  },
+  sectionLabelFirst: {
+    fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+    color: '#94a3b8', margin: '0 0 8px 0',
+  },
+  label: { fontSize: 13, fontWeight: 500, color: '#f1f5f9', marginBottom: 6, display: 'block' },
+  select: {
+    width: '100%', padding: '9px 12px', fontSize: 13, color: '#f1f5f9',
+    backgroundColor: '#1a1a1a', border: '1px solid rgba(0,83,23,0.3)', borderRadius: 8,
+    outline: 'none', cursor: 'pointer', fontFamily: 'inherit',
+  },
+  textarea: {
+    width: '100%', padding: '9px 12px', fontSize: 13, color: '#f1f5f9',
+    backgroundColor: '#1a1a1a', border: '1px solid rgba(0,83,23,0.3)', borderRadius: 8,
+    outline: 'none', resize: 'vertical', minHeight: 80, fontFamily: 'inherit',
+    boxSizing: 'border-box',
+  },
+  currentValueBox: {
+    display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
+    backgroundColor: '#0d1a0d', borderRadius: 8, border: '1px solid #005317',
+    fontSize: 13, color: '#005317',
+  },
+  btnPrimary: (disabled) => ({
+    padding: '9px 20px', fontSize: 13, fontWeight: 600,
+    backgroundColor: disabled ? '#1a1a1a' : '#005317',
+    color: disabled ? '#94a3b8' : '#000000',
+    border: disabled ? '1px solid rgba(0,83,23,0.2)' : 'none', borderRadius: 8,
+    cursor: disabled ? 'not-allowed' : 'pointer', fontFamily: 'inherit',
+  }),
+  btnGhost: {
+    padding: '9px 16px', fontSize: 13, fontWeight: 500,
+    backgroundColor: '#1a1a1a', color: '#94a3b8', border: '1px solid rgba(0,83,23,0.2)',
+    borderRadius: 8, cursor: 'pointer', fontFamily: 'inherit',
+  },
+};
+
+const FEEDBACK_TYPES = [
+  { value: 'positive', label: 'Positive', Icon: FiSmile, activeColor: '#065f46', activeBg: '#d1fae5', activeBorder: '#6ee7b7' },
+  { value: 'neutral',  label: 'Neutral',  Icon: FiMeh,   activeColor: '#92400e', activeBg: '#fef3c7', activeBorder: '#fcd34d' },
+  { value: 'negative', label: 'Negative', Icon: FiFrown, activeColor: '#991b1b', activeBg: '#fee2e2', activeBorder: '#fca5a5' },
+];
 
 function FeedbackForm({ userId, onFeedbackSubmitted, onSettingsUpdate }) {
   const { settings, updateSetting, reloadSettings } = useSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    rating: 5,
-    feedbackType: 'positive',
-    comment: '',
-    parameter: 'target_size',
-    currentValue: null
+  const [form, setForm] = useState({
+    rating: 5, feedbackType: 'positive', comment: '', parameter: 'target_size',
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Get current value based on parameter
-      const currentValue = formData.currentValue || getCurrentValue(formData.parameter);
-
-      // NEW SIMPLIFIED FORMAT - Send current value + feedback, RL predicts next
-      const feedbackData = {
-        parameter: formData.parameter,
-        currentValue: currentValue,
-        feedback: {
-          type: formData.feedbackType,
-          rating: parseInt(formData.rating),
-          comment: formData.comment.trim() || undefined,
-          accepted: formData.feedbackType === 'positive',
-          responseTime: 2000
-        },
-        context: {
-          deviceType: getDeviceType(),
-          timeOfDay: getTimeOfDay(),
-          sessionDuration: 60000,
-          interactionCount: 5,
-          pageUrl: window.location.href
-        }
-      };
-
-      console.log('[Feedback] Submitting feedback:', feedbackData);
-      const result = await submitFeedback(userId, feedbackData);
-      console.log('[Feedback] Received result:', result);
-
-      // Auto-apply RL suggestion if available
-      if (result.data?.nextSuggestion) {
-        const suggestion = result.data.nextSuggestion;
-        console.log('[Feedback] Auto-applying RL suggestion:', suggestion.suggestedValue);
-
-        // First update local settings for immediate feedback
-        updateSetting(formData.parameter, suggestion.suggestedValue);
-
-        // Then reload from backend to ensure we have the latest RL suggestions
-        setTimeout(async () => {
-          await reloadSettings();
-          console.log('[Feedback] Reloaded settings from backend');
-        }, 500);
-
-        // Show success message with what was changed
-        if (onSettingsUpdate) {
-          onSettingsUpdate({
-            [formData.parameter]: suggestion.suggestedValue,
-            reason: suggestion.reason,
-            confidence: suggestion.confidence
-          });
-        }
-      }
-
-      closeAndReset();
-
-      // Notify parent component
-      if (onFeedbackSubmitted) {
-        onFeedbackSubmitted(result);
-      }
-    } catch (error) {
-      console.error('Error submitting feedback:', error);
-      alert('Failed to submit feedback. Please try again.');
-      setIsSubmitting(false);
-    }
-  };
-
-  const getCurrentValue = (parameter) => {
-    // Return current value from global settings
-    return settings[parameter] || formData.currentValue;
-  };
-
-  const getDeviceType = () => {
-    const width = window.innerWidth;
-    if (width < 768) return 'mobile';
-    if (width < 1024) return 'tablet';
-    return 'desktop';
-  };
+  const getCurrentValue = (param) => settings[param] ?? '';
 
   const getTimeOfDay = () => {
-    const hour = new Date().getHours();
-    if (hour < 6) return 'night';
-    if (hour < 12) return 'morning';
-    if (hour < 18) return 'afternoon';
-    if (hour < 22) return 'evening';
+    const h = new Date().getHours();
+    if (h < 6) return 'night';
+    if (h < 12) return 'morning';
+    if (h < 18) return 'afternoon';
+    if (h < 22) return 'evening';
     return 'night';
   };
 
-  const closeAndReset = () => {
-    setFormData({
-      rating: 5,
-      feedbackType: 'positive',
-      comment: '',
-      parameter: 'target_size',
-      currentValue: null
-    });
+  const reset = () => {
+    setForm({ rating: 5, feedbackType: 'positive', comment: '', parameter: 'target_size' });
     setIsOpen(false);
     setIsSubmitting(false);
   };
 
-  const handleRatingChange = (rating) => {
-    setFormData(prev => ({
-      ...prev,
-      rating,
-      feedbackType: rating >= 4 ? 'positive' : rating >= 3 ? 'neutral' : 'negative'
+  const handleRating = (rating) => {
+    setForm((prev) => ({
+      ...prev, rating,
+      feedbackType: rating >= 4 ? 'positive' : rating >= 3 ? 'neutral' : 'negative',
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const currentValue = getCurrentValue(form.parameter);
+      const result = await submitFeedback(userId, {
+        parameter: form.parameter,
+        currentValue,
+        feedback: {
+          type: form.feedbackType, rating: parseInt(form.rating),
+          comment: form.comment.trim() || undefined,
+          accepted: form.feedbackType === 'positive', responseTime: 2000,
+        },
+        context: {
+          deviceType: 'desktop', timeOfDay: getTimeOfDay(),
+          sessionDuration: 60000, interactionCount: 5, pageUrl: window.location.href,
+        },
+      });
+      if (result.data?.nextSuggestion) {
+        const s = result.data.nextSuggestion;
+        updateSetting(form.parameter, s.suggestedValue);
+        setTimeout(() => reloadSettings(), 500);
+        if (onSettingsUpdate) onSettingsUpdate({ [form.parameter]: s.suggestedValue, reason: s.reason, confidence: s.confidence });
+      }
+      reset();
+      if (onFeedbackSubmitted) onFeedbackSubmitted(result);
+    } catch (err) {
+      console.error('Feedback error:', err);
+      alert('Failed to submit feedback. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="btn btn-primary gap-2 shadow-lg"
+        style={{
+          display: 'flex', alignItems: 'center', gap: 7, padding: '8px 16px',
+          fontSize: 13, fontWeight: 600, color: '#ffffff',
+          backgroundColor: '#005317', border: 'none',
+          borderRadius: 8, cursor: 'pointer', fontFamily: 'inherit',
+        }}
       >
-        <FiMessageCircle /> Give Feedback
+        <FiMessageCircle size={14} /> Give Feedback
       </button>
 
       {isOpen && (
-        <div className="modal modal-open">
-          <div className="modal-box max-w-2xl">
-            <h3 className="font-bold text-2xl mb-4 flex items-center gap-2">
-              <FiMessageCircle /> Share Your Feedback
-            </h3>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Rating */}
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">How would you rate your experience?</span>
-                </label>
-                <div className="flex gap-2 justify-center py-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => handleRatingChange(star)}
-                      className={`text-5xl transition-transform hover:scale-110 ${star <= formData.rating ? 'opacity-100' : 'opacity-30'
-                        }`}
-                    >
-                      <FiStar className={star <= formData.rating ? 'text-warning' : 'text-base-content/40'} />
-                    </button>
-                  ))}
-                </div>
-                <div className="text-center text-sm opacity-70">
-                  {formData.rating === 5 && 'Excellent'}
-                  {formData.rating === 4 && 'Good'}
-                  {formData.rating === 3 && 'Okay'}
-                  {formData.rating === 2 && 'Could be better'}
-                  {formData.rating === 1 && 'Needs improvement'}
-                </div>
+        <div
+          style={S.overlay}
+          onClick={(e) => { if (e.target === e.currentTarget && !isSubmitting) reset(); }}
+        >
+          <div style={S.panel}>
+            <div style={S.panelHeader}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={S.badge}>FEEDBACK</span>
+                <h3 style={S.title}>Share Your Experience</h3>
               </div>
+              <button style={S.closeBtn} onClick={() => !isSubmitting && reset()} aria-label="Close">
+                &times;
+              </button>
+            </div>
 
-              {/* Feedback Type */}
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">Feedback Type</span>
-                </label>
-                <div className="join w-full">
-                  <button
-                    type="button"
-                    className={`btn join-item flex-1 ${formData.feedbackType === 'positive' ? 'btn-success' : 'btn-outline'}`}
-                    onClick={() => setFormData(prev => ({ ...prev, feedbackType: 'positive' }))}
-                  >
-                    <FiSmile /> Positive
-                  </button>
-                  <button
-                    type="button"
-                    className={`btn join-item flex-1 ${formData.feedbackType === 'neutral' ? 'btn-warning' : 'btn-outline'}`}
-                    onClick={() => setFormData(prev => ({ ...prev, feedbackType: 'neutral' }))}
-                  >
-                    <FiMeh /> Neutral
-                  </button>
-                  <button
-                    type="button"
-                    className={`btn join-item flex-1 ${formData.feedbackType === 'negative' ? 'btn-error' : 'btn-outline'}`}
-                    onClick={() => setFormData(prev => ({ ...prev, feedbackType: 'negative' }))}
-                  >
-                    <FiFrown /> Negative
-                  </button>
-                </div>
-              </div>
-
-              {/* Parameter */}
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">What would you like to give feedback on?</span>
-                </label>
-                <select
-                  className="select select-bordered w-full"
-                  value={formData.parameter}
-                  onChange={(e) => setFormData(prev => ({ ...prev, parameter: e.target.value, currentValue: null }))}
-                >
-                  <option value="target_size">Button Size</option>
-                  <option value="font_size">Font Size</option>
-                  <option value="line_height">Line Height</option>
-                  <option value="theme">Theme (Light/Dark)</option>
-                  <option value="contrast_mode">Contrast Mode</option>
-                  <option value="element_spacing">Element Spacing</option>
-                </select>
-              </div>
-
-              {/* Current Value */}
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">Current Value (Active on Entire Website)</span>
-                </label>
-                <div className="alert alert-info">
-                  <div className="flex-1">
-                    <span>Current {formData.parameter}: <strong className="text-lg">{formData.currentValue || getCurrentValue(formData.parameter)}</strong></span>
-                    <div className="text-xs mt-1 opacity-70 flex items-center gap-1">
-                      <FiZap /> This value is applied to the entire dashboard
-                    </div>
+            <form onSubmit={handleSubmit}>
+              <div style={S.body}>
+                {/* Rating */}
+                <div style={S.sectionLabelFirst}>Rating</div>
+                <div style={{ textAlign: 'center', marginBottom: 16 }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 6 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star} type="button" onClick={() => handleRating(star)}
+                        style={{
+                          background: 'none', border: 'none', cursor: 'pointer',
+                          fontSize: 32, lineHeight: 1, padding: 4,
+                          color: star <= form.rating ? '#f59e0b' : '#4a4a4a',
+                          transform: star <= form.rating ? 'scale(1.1)' : 'scale(1)',
+                          transition: 'all 0.15s',
+                        }}
+                      >&#9733;</button>
+                    ))}
                   </div>
+                  <span style={{ fontSize: 13, color: '#94a3b8' }}>{STAR_LABELS[form.rating]}</span>
                 </div>
-              </div>
 
-              {/* Comment */}
-              <div>
-                <label className="label">
-                  <span className="label-text font-semibold">Your feedback (optional)</span>
-                </label>
+                {/* Feedback Type */}
+                <div style={S.sectionLabel}>Feedback Type</div>
+                <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+                  {FEEDBACK_TYPES.map(({ value, label, Icon, activeColor, activeBg, activeBorder }) => {
+                    const active = form.feedbackType === value;
+                    return (
+                      <button
+                        key={value} type="button"
+                        onClick={() => setForm((p) => ({ ...p, feedbackType: value }))}
+                        style={{
+                          flex: 1, padding: '8px 10px', fontSize: 13, fontWeight: active ? 600 : 400,
+                          border: `1px solid ${active ? activeBorder : 'rgba(0,83,23,0.3)'}`,
+                          backgroundColor: active ? activeBg : '#1a1a1a',
+                          color: active ? activeColor : '#94a3b8',
+                          borderRadius: 8, cursor: 'pointer',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                          fontFamily: 'inherit',
+                        }}
+                      >
+                        <Icon size={13} /> {label}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Parameter */}
+                <div style={S.sectionLabel}>Parameter</div>
+                <div style={{ marginBottom: 12 }}>
+                  <label style={S.label}>What would you like to give feedback on?</label>
+                  <select
+                    style={S.select}
+                    value={form.parameter}
+                    onChange={(e) => setForm((p) => ({ ...p, parameter: e.target.value }))}
+                  >
+                    <option value="target_size">Button Size</option>
+                    <option value="font_size">Font Size</option>
+                    <option value="line_height">Line Height</option>
+                    <option value="theme">Theme (Light / Dark)</option>
+                    <option value="contrast_mode">Contrast Mode</option>
+                    <option value="element_spacing">Element Spacing</option>
+                  </select>
+                </div>
+
+                <div style={S.currentValueBox}>
+                  <FiZap size={13} style={{ flexShrink: 0 }} />
+                  <span>
+                    Current <strong>{form.parameter}</strong>:{' '}
+                    <strong>{String(getCurrentValue(form.parameter))}</strong>
+                    {' '}&mdash; applied to the entire dashboard
+                  </span>
+                </div>
+
+                {/* Comment */}
+                <div style={{ ...S.sectionLabel, marginTop: 16 }}>
+                  Comment{' '}
+                  <span style={{ fontWeight: 400, textTransform: 'none', fontSize: 11, color: '#c4c9d1' }}>(optional)</span>
+                </div>
                 <textarea
-                  className="textarea textarea-bordered w-full h-24"
+                  style={S.textarea}
                   placeholder="Tell us what you think..."
-                  value={formData.comment}
-                  onChange={(e) => setFormData(prev => ({ ...prev, comment: e.target.value }))}
+                  value={form.comment}
+                  onChange={(e) => setForm((p) => ({ ...p, comment: e.target.value }))}
                 />
               </div>
 
-              {/* Actions */}
-              <div className="modal-action">
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  className="btn btn-ghost"
-                  disabled={isSubmitting}
-                >
+              <div style={S.footer}>
+                <button type="button" onClick={() => !isSubmitting && reset()} style={S.btnGhost} disabled={isSubmitting}>
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <span className="loading loading-spinner loading-sm"></span>
-                      Submitting...
-                    </>
-                  ) : (
-                    'Submit Feedback'
-                  )}
+                <button type="submit" style={S.btnPrimary(isSubmitting)} disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting\u2026' : 'Submit Feedback'}
                 </button>
               </div>
             </form>
           </div>
-          <div className="modal-backdrop" onClick={() => setIsOpen(false)}></div>
         </div>
       )}
     </>
