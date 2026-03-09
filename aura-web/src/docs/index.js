@@ -1,15 +1,13 @@
 import gettingStarted from "./getting-started.md?raw";
-// import installation from "./installation.md";
-// import personalization from "./personalization.md";
-// import apiReference from "./api-reference.md";
-// import adaptiveButton from "./components/adaptive-button.md";
-// import adaptiveCard from "./components/adaptive-card.md";
+import installation from "./installation.md?raw";
+import apiReference from "./api-reference.md?raw";
+import adaptiveButton from "./components/adaptive-button.md?raw";
+import adaptiveCard from "./components/adaptive-card.md?raw";
 
 export const docsMap = {
   "getting-started": gettingStarted,
-//   "installation": installation,
-//   "personalization": personalization,
-//   "api-reference": apiReference,
-//   "components/adaptive-button": adaptiveButton,
-//   "components/adaptive-card": adaptiveCard,
+  "installation": installation,
+  "api-reference": apiReference,
+  "components/adaptive-button": adaptiveButton,
+  "components/adaptive-card": adaptiveCard,
 };

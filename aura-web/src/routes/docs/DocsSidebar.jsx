@@ -11,52 +11,61 @@ const sections = [
   {
     title: "Core Concepts",
     items: [
-      { label: "Personalization Profiles", to: "/docs/personalization" },
+      { label: "API Reference", to: "/docs/api-reference" },
     ],
   },
   {
     title: "Components",
     items: [
-      { label: "Adaptive Button", to: "/docs/components/adaptive-button" },
-      { label: "Adaptive Card", to: "/docs/components/adaptive-card" },
-    ],
-  },
-  {
-    title: "API",
-    items: [
-      { label: "API Reference", to: "/docs/api-reference" },
+      { label: "AdaptiveButton", to: "/docs/components/adaptive-button" },
+      { label: "AdaptiveCard", to: "/docs/components/adaptive-card" },
     ],
   },
 ];
 
 export default function DocsSidebar() {
   return (
-    <nav className="sticky top-24 space-y-6 text-sm bg-base-200 p-6 rounded-md">
-      {sections.map((section) => (
-        <div key={section.title}>
-          <h4 className="mb-2 text-md font-semibold tracking-wide text-gray-500">
-            {section.title}
-          </h4>
-          <ul className="space-y-1">
-            {section.items.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `block rounded-md px-2 py-1.5 transition ${
-                      isActive
-                        ? "bg-base-300 font-medium text-base-content"
-                        : "text-gray-400 hover:bg-base-300 hover:text-base-content"
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </nav>
+    <aside className="w-64 min-h-screen border-r border-base-300 bg-base-100 px-4 py-8 flex-shrink-0">
+      {/* Package badge */}
+      <div className="mb-8 px-2">
+        <a
+          href="https://www.npmjs.com/package/@aura-adaptive/aura-ui-adaptor"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-xs font-mono bg-base-200 border border-base-300 px-3 py-1.5 rounded-full text-base-content/60 hover:text-primary hover:border-primary/40 transition-colors"
+        >
+          📦 @aura-adaptive/aura-ui-adaptor
+        </a>
+        <p className="text-xs text-base-content/40 mt-1.5 ml-1">v1.0.1 · MIT</p>
+      </div>
+
+      {/* Nav sections */}
+      <nav className="space-y-6">
+        {sections.map((section) => (
+          <div key={section.title}>
+            <h4 className="mb-2 px-2 text-xs font-bold tracking-widest uppercase text-base-content/40">
+              {section.title}
+            </h4>
+            <ul className="space-y-0.5">
+              {section.items.map((item) => (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `block rounded-lg px-3 py-2 text-sm transition-colors ${isActive
+                        ? "bg-primary/10 font-semibold text-primary"
+                        : "text-base-content/60 hover:bg-base-200 hover:text-base-content"
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </aside>
   );
 }

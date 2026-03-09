@@ -13,7 +13,7 @@ export default function DocsContent() {
   }
 
   return (
-    <article className="prose prose-invert max-w-none">
+    <article className="docs-content">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>
         {content}
       </ReactMarkdown>
