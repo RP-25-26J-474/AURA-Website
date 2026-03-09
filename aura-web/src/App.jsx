@@ -2,22 +2,20 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
 import LandingLayout from "./layouts/LandingLayout";
+import DocsShellLayout from "./layouts/DocsShellLayout";
 import DeveloperLayout from "./layouts/DevLayout";
 import ClientLayout from "./layouts/ClientLayout";
 
 import LandingPage from "./routes/public/LandingPage";
 import Pricing from "./routes/public/Pricing";
 import DocsLayout from "./routes/docs/DocsLayout";
-import DocsContent from "./routes/docs/DocsContent";
 import ContactUs from "./routes/public/ContactUs";
 
 import LoginPage from "./routes/auth/LoginPage";
 import RegisterPage from "./routes/auth/RegisterPage";
 
 import ClientDashboard from "./routes/client/ClientDashboard";
-
 import DevDashboard from "./routes/developer/DevDashboard";
-
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -25,20 +23,19 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Landing / marketing / docs */}
+          {/* Landing / marketing */}
           <Route element={<LandingLayout />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/pricing" element={<Pricing />} />
-
-            <Route path="/docs" element={<DocsLayout />}>
-              <Route index element={<DocsContent />} />
-              <Route path="*" element={<DocsContent />} />
-            </Route>
-
             <Route path="/contact-us" element={<ContactUs />} />
           </Route>
 
-          {/* Auth pages (no dashboard chrome) */}
+          {/* Docs — own shell, no footer, sticky sidebar */}
+          <Route path="/docs" element={<DocsShellLayout />}>
+            <Route path="*" element={<DocsLayout />} />
+          </Route>
+
+          {/* Auth */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
