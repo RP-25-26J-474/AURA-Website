@@ -5,7 +5,10 @@ import remarkGfm from "remark-gfm";
 import { docsMap } from "../../docs";
 import { FaCopy, FaCheck } from "react-icons/fa6";
 
-/** Beautiful code block component */
+/**
+ * Fenced code block — rendered when react-markdown wraps <code> in <pre>.
+ * This is the only place that gets the fancy language-bar + copy button.
+ */
 function CodeBlock({ children, className }) {
   const [copied, setCopied] = useState(false);
   const language = className?.replace("language-", "") ?? "text";
@@ -41,20 +44,11 @@ function CodeBlock({ children, className }) {
           )}
         </button>
       </div>
-      {/* Code */}
-      <pre className="overflow-x-auto bg-base-300 px-5 py-4 text-sm font-mono leading-relaxed text-base-content/85">
+      {/* Code body */}
+      <pre className="overflow-x-auto bg-base-300 px-5 py-4 text-sm font-mono leading-relaxed text-base-content/85 m-0">
         <code>{code}</code>
       </pre>
     </div>
-  );
-}
-
-/** Inline code */
-function InlineCode({ children }) {
-  return (
-    <code className="font-mono text-[0.84em] bg-primary/10 text-primary px-1.5 py-0.5 rounded border border-primary/20">
-      {children}
-    </code>
   );
 }
 
@@ -94,16 +88,33 @@ function Blockquote({ children }) {
 }
 
 const components = {
-  code: ({ node, inline, className, children, ...props }) =>
-    inline ? (
-      <InlineCode>{children}</InlineCode>
-    ) : (
-      <CodeBlock className={className}>{children}</CodeBlock>
-    ),
+  /**
+   * `pre` owns the fancy copy-box block renderer.
+   * react-markdown wraps fenced code blocks as <pre><code>…</code></pre>.
+   * We intercept at the `pre` level and pass className + children down to CodeBlock.
+   */
+  pre: ({ children }) => {
+    const child = Array.isArray(children) ? children[0] : children;
+    const className = child?.props?.className ?? "";
+    const code = child?.props?.children ?? "";
+    return <CodeBlock className={className}>{code}</CodeBlock>;
+  },
+
+  /**
+   * `code` only handles INLINE backtick code now (no fenced blocks).
+   * Gives a subtle tinted style — no copy box, no language bar.
+   */
+  code: ({ children }) => (
+    <code className="font-mono text-[0.84em] bg-primary/10 text-primary px-1.5 py-0.5 rounded border border-primary/20">
+      {children}
+    </code>
+  ),
+
   table: ({ children }) => <Table>{children}</Table>,
   th: ({ children }) => <Th>{children}</Th>,
   td: ({ children }) => <Td>{children}</Td>,
   blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
+
   h1: ({ children }) => (
     <h1 className="text-3xl font-bold text-base-content mt-0 mb-4 pb-3 border-b border-base-300">
       {children}
@@ -126,7 +137,12 @@ const components = {
     <p className="text-base-content/70 leading-relaxed mb-4">{children}</p>
   ),
   a: ({ href, children }) => (
-    <a href={href} className="text-primary hover:underline" target={href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
+    <a
+      href={href}
+      className="text-primary hover:underline"
+      target={href?.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+    >
       {children}
     </a>
   ),
@@ -138,7 +154,9 @@ const components = {
   ),
   li: ({ children }) => <li className="text-base-content/70 leading-relaxed">{children}</li>,
   hr: () => <hr className="my-8 border-base-300" />,
-  strong: ({ children }) => <strong className="text-base-content font-semibold">{children}</strong>,
+  strong: ({ children }) => (
+    <strong className="text-base-content font-semibold">{children}</strong>
+  ),
 };
 
 export default function DocsContent() {
