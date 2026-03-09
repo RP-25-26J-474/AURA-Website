@@ -42,10 +42,11 @@ export default function Navbar({
           }`}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          {/* 3-column: brand | centered-nav (absolute) | right */}
+          <div className="relative flex h-16 items-center justify-between">
 
-            {/* Brand */}
-            <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
+            {/* Brand — left */}
+            <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 z-10">
               <img src={logos.aura} alt="AURA" className="h-8 w-8" />
               <span className="text-lg font-bold text-base-content">{brand}</span>
               <span className="hidden md:block text-xs text-base-content/50 border-l border-base-content/20 pl-2.5">
@@ -53,8 +54,8 @@ export default function Navbar({
               </span>
             </Link>
 
-            {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-1">
+            {/* Desktop nav — absolutely centered so it's ALWAYS in the true middle */}
+            <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
               {menuItems.map((item) =>
                 item.children ? (
                   <div key={item.label} className="relative group">
@@ -99,28 +100,9 @@ export default function Navbar({
               )}
             </nav>
 
-            {/* Right side */}
-            <div className="flex items-center gap-2">
+            {/* Right — ThemeButton + mobile hamburger only (no login/register) */}
+            <div className="flex items-center gap-2 z-10">
               <ThemeButton />
-
-              {user ? (
-                <>
-                  <span className="hidden md:inline text-sm text-base-content/60">
-                    Hi, {user.name}
-                  </span>
-                  <button onClick={logout} className="btn btn-sm btn-ghost">
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <div className="hidden lg:flex items-center gap-2">
-                  {rightItems.map((btn) => (
-                    <Link key={btn.label} to={btn.to} className={btn.className + " btn-sm"}>
-                      {btn.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
 
               {/* Mobile hamburger */}
               <button
@@ -139,8 +121,10 @@ export default function Navbar({
                 )}
               </button>
             </div>
+
           </div>
         </div>
+
       </header>
 
       {/* Mobile overlay */}
@@ -224,22 +208,6 @@ export default function Navbar({
             )
           )}
         </nav>
-
-        {/* Drawer footer — auth buttons */}
-        {!user && rightItems.length > 0 && (
-          <div className="px-4 py-5 border-t border-base-300 flex flex-col gap-2">
-            {rightItems.map((btn) => (
-              <Link
-                key={btn.label}
-                to={btn.to}
-                className={`${btn.className} justify-center`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {btn.label}
-              </Link>
-            ))}
-          </div>
-        )}
       </div>
     </>
   );
