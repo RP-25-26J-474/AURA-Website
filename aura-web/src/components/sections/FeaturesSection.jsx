@@ -3,7 +3,7 @@ import React from "react";
 const features = [
     {
         icon: "🧩",
-        title: "35+ Adaptive Components",
+        title: "15+ Adaptive Components",
         description:
             "Drop-in replacements for every common UI primitive — buttons, inputs, cards, tables, modals, navbars, and more. Each component reads the active personalization profile and adapts automatically.",
         chips: ["AdaptiveButton", "AdaptiveCard", "AdaptiveInput", "AdaptiveTable", "AdaptiveModal"],
