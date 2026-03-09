@@ -1,6 +1,24 @@
 # API Reference
 
-Complete reference for the `@aura-adaptive/aura-ui-adaptor` package exports.
+Complete reference for the `@aura-adaptive/aura-ui-adaptor` package (v1.0.1).
+
+---
+
+## Import
+
+```bash
+npm install @aura-adaptive/aura-ui-adaptor
+```
+
+```jsx
+import {
+  AdaptiveProvider,
+  useAdaptive,
+  AdaptiveButton,
+  AdaptiveText,
+  // ... other components
+} from "@aura-adaptive/aura-ui-adaptor";
+```
 
 ---
 
@@ -9,8 +27,6 @@ Complete reference for the `@aura-adaptive/aura-ui-adaptor` package exports.
 Wraps your application and manages personalization state. Must be the parent of all Adaptive components.
 
 ```jsx
-import { AdaptiveProvider } from "@aura-adaptive/aura-ui-adaptor";
-
 <AdaptiveProvider simulateExtensionInstalled={false}>
   <App />
 </AdaptiveProvider>
@@ -27,49 +43,37 @@ import { AdaptiveProvider } from "@aura-adaptive/aura-ui-adaptor";
 
 The provider tries three paths in order:
 
-1. **Extension Mode** — Reads the active personalization profile directly from the AURA browser extension if installed
-2. **Simulation Mode** — Uses bundled mock profile data (when `simulateExtensionInstalled={true}`)
-3. **Fallback Mode** — Runs a bundled lightweight ML prediction model using cached signals. Can optionally render an installation prompt.
+| Mode | Trigger | Description |
+|------|---------|-------------|
+| **Extension** | Default | Reads the active profile from the AURA browser extension |
+| **Simulation** | `simulateExtensionInstalled={true}` | Uses bundled mock profile for local development |
+| **Fallback** | No extension found | Runs a bundled ML prediction model using cached signals |
 
 ---
 
 ## `useAdaptive()`
 
-React hook that exposes the current personalization state.
+React hook that exposes the current personalization state. Must be called inside `<AdaptiveProvider>`.
 
 ```jsx
-import { useAdaptive } from "@aura-adaptive/aura-ui-adaptor";
-
-function MyComponent() {
-  const { loading, source, tokens, profile, reload } = useAdaptive();
-
-  if (loading) return <p>Loading...</p>;
-
-  return (
-    <section>
-      <p>Source: {source}</p>
-      <p>Theme: {tokens.flags.theme}</p>
-      <button onClick={() => void reload()}>Reload</button>
-    </section>
-  );
-}
+const { loading, source, tokens, profile, reload } = useAdaptive();
 ```
 
 ### Return Values
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loading` | `boolean` | `true` while the provider is fetching or predicting a profile |
-| `source` | `string` | Where the profile came from: `"extension"`, `"simulation"`, or `"fallback"` |
-| `tokens` | `object` | UI design tokens derived from the user's profile (colors, sizes, flags) |
-| `profile` | `object` | The raw personalization profile object |
-| `reload` | `() => Promise<void>` | Manually re-fetches or re-predicts the profile |
+| `loading` | `boolean` | `true` while the provider is fetching or predicting |
+| `source` | `"extension" \| "simulation" \| "fallback"` | Profile origin |
+| `tokens` | `object` | Resolved UI design tokens |
+| `profile` | `object` | Raw personalization profile |
+| `reload` | `() => Promise<void>` | Re-fetches or re-predicts the profile |
 
 ---
 
-## `predictFallbackTokens()`
+## `predictFallbackTokens(signals)`
 
-Utility function used internally by the provider to run the bundled prediction model. Exposed for advanced usage.
+Utility that runs the bundled ML model to predict UI tokens from cached signals. Used internally by `AdaptiveProvider` — exposed for advanced cases.
 
 ```jsx
 import { predictFallbackTokens } from "@aura-adaptive/aura-ui-adaptor";
@@ -79,47 +83,60 @@ const tokens = await predictFallbackTokens(cachedSignals);
 
 ---
 
-## Full Component List
+## All Exports
 
-All components below are named exports from `@aura-adaptive/aura-ui-adaptor`:
+```jsx
+// Utilities
+import {
+  AdaptiveProvider,
+  useAdaptive,
+  predictFallbackTokens,
+} from "@aura-adaptive/aura-ui-adaptor";
 
-| Component | Description |
-|-----------|-------------|
-| `AdaptiveAlert` | Contextual alert / notification banner |
-| `AdaptiveButton` | Accessible, adaptive call-to-action button |
-| `AdaptiveCard` | Content card with adaptive padding and shadow |
-| `AdaptiveCheckbox` | Accessible checkbox with adaptive target size |
-| `AdaptiveDialog` | Modal dialog |
-| `AdaptiveDrawer` | Side-panel drawer |
-| `AdaptiveDropdown` | Dropdown menu |
-| `AdaptiveGrid` | Responsive adaptive grid layout |
-| `AdaptiveHero` | Full-width hero / banner section |
-| `AdaptiveIcon` | Scaled icon wrapper |
-| `AdaptiveInput` | Text input field |
-| `AdaptiveLayout` | Page-level layout container |
-| `AdaptiveLink` | Hyperlink with adaptive styling |
-| `AdaptiveList` | Ordered / unordered list |
-| `AdaptiveMenu` | Navigation menu |
-| `AdaptiveModal` | Overlay modal |
-| `AdaptiveNavbar` | Top navigation bar |
-| `AdaptiveNotification` | Toast-style notification |
-| `AdaptivePagination` | Page controls |
-| `AdaptivePopover` | Anchored popover/tooltip |
-| `AdaptiveProgressBar` | Linear progress indicator |
-| `AdaptiveSection` | Page section wrapper |
-| `AdaptiveSelect` | Select / dropdown input |
-| `AdaptiveSidebar` | Collapsible sidebar navigation |
-| `AdaptiveSkeleton` | Loading skeleton placeholder |
-| `AdaptiveSlider` | Range slider |
-| `AdaptiveSpinner` | Loading spinner |
-| `AdaptiveStepper` | Multi-step progress indicator |
-| `AdaptiveSwitch` | Toggle switch |
-| `AdaptiveTable` | Data table |
-| `AdaptiveTabs` | Tab navigation |
-| `AdaptiveTag` | Label / badge chip |
-| `AdaptiveText` | Typography component (headings, body, etc.) |
-| `AdaptiveTextarea` | Multi-line text input |
-| `AdaptiveToast` | Pop-up toast notification |
-| `AdaptiveTooltip` | Hover tooltip |
-| `AdaptiveVideo` | Video player container |
-| `AdaptiveVisualizer` | Data visualization wrapper |
+// Components
+import {
+  AdaptiveAlert,
+  AdaptiveButton,
+  AdaptiveCard,
+  AdaptiveCheckbox,
+  AdaptiveDialog,
+  AdaptiveDrawer,
+  AdaptiveDropdown,
+  AdaptiveGrid,
+  AdaptiveInput,
+  AdaptiveList,
+  AdaptiveMenu,
+  AdaptiveNavbar,
+  AdaptivePagination,
+  AdaptiveSelect,
+  AdaptiveSwitch,
+  AdaptiveTable,
+  AdaptiveText,
+  AdaptiveTextarea,
+  AdaptiveTooltip,
+} from "@aura-adaptive/aura-ui-adaptor";
+```
+
+### Component Summary
+
+| Component | Category | Description |
+|-----------|----------|-------------|
+| `AdaptiveText` | Data Display | Typography — headings, body, captions |
+| `AdaptiveCard` | Data Display | Content card with adaptive padding |
+| `AdaptiveTable` | Data Display | Accessible sortable data table |
+| `AdaptiveList` | Data Display | Ordered / unordered list |
+| `AdaptiveButton` | Forms | Adaptive call-to-action button |
+| `AdaptiveInput` | Forms | Text input field |
+| `AdaptiveTextarea` | Forms | Multi-line text input |
+| `AdaptiveSelect` | Forms | Select / dropdown input |
+| `AdaptiveCheckbox` | Forms | Accessible checkbox |
+| `AdaptiveSwitch` | Forms | Toggle switch |
+| `AdaptiveGrid` | Layout | Responsive adaptive grid |
+| `AdaptiveNavbar` | Layout | Pre-built navigation bar |
+| `AdaptiveMenu` | Navigation | Context / command menu |
+| `AdaptiveDropdown` | Navigation | Button with dropdown actions |
+| `AdaptivePagination` | Navigation | Page navigation controls |
+| `AdaptiveAlert` | Feedback | Inline contextual alert banner |
+| `AdaptiveDialog` | Overlay | Confirmation dialog |
+| `AdaptiveDrawer` | Overlay | Side-panel drawer |
+| `AdaptiveTooltip` | Overlay | Hover / focus tooltip |

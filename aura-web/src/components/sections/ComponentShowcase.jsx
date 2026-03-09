@@ -1,6 +1,12 @@
 import React from "react";
 
-// All 35+ components exported from the package
+// Exact exports from @aura-adaptive/aura-ui-adaptor v1.0.1
+const utilities = [
+    "AdaptiveProvider",
+    "useAdaptive",
+    "predictFallbackTokens",
+];
+
 const components = [
     "AdaptiveAlert",
     "AdaptiveButton",
@@ -10,39 +16,18 @@ const components = [
     "AdaptiveDrawer",
     "AdaptiveDropdown",
     "AdaptiveGrid",
-    "AdaptiveHero",
-    "AdaptiveIcon",
     "AdaptiveInput",
-    "AdaptiveLayout",
-    "AdaptiveLink",
     "AdaptiveList",
     "AdaptiveMenu",
-    "AdaptiveModal",
     "AdaptiveNavbar",
-    "AdaptiveNotification",
     "AdaptivePagination",
-    "AdaptivePopover",
-    "AdaptiveProgressBar",
-    "AdaptiveSection",
     "AdaptiveSelect",
-    "AdaptiveSidebar",
-    "AdaptiveSkeleton",
-    "AdaptiveSlider",
-    "AdaptiveSpinner",
-    "AdaptiveStepper",
     "AdaptiveSwitch",
     "AdaptiveTable",
-    "AdaptiveTabs",
-    "AdaptiveTag",
     "AdaptiveText",
     "AdaptiveTextarea",
-    "AdaptiveToast",
     "AdaptiveTooltip",
-    "AdaptiveVideo",
-    "AdaptiveVisualizer",
 ];
-
-const utilities = ["AdaptiveProvider", "useAdaptive", "predictFallbackTokens"];
 
 export default function ComponentShowcase() {
     return (
@@ -54,7 +39,7 @@ export default function ComponentShowcase() {
                         Component Library
                     </span>
                     <h2 className="text-4xl font-bold text-base-content sm:text-5xl">
-                        <span className="text-primary">{components.length}+</span> adaptive components,{" "}
+                        <span className="text-primary">{components.length}</span> adaptive components,{" "}
                         ready to use
                     </h2>
                     <p className="mt-4 text-base-content/60 text-lg">
