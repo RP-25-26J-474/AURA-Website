@@ -17,7 +17,7 @@ function HeroSection() {
 
   return (
     <div className="bg-base-100 min-h-screen">
-      <div className="relative isolate px-6 py-12 lg:px-8">
+      <div className="relative isolate px-6 lg:px-8 flex flex-col items-center justify-center flex-1 min-h-[calc(100vh-4rem)] py-16">
         {/* Top gradient blob */}
         <div
           aria-hidden="true"
@@ -29,7 +29,7 @@ function HeroSection() {
           />
         </div>
 
-        <div className="mx-auto max-w-3xl py-12 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-3xl w-full">
           {/* Badge */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-base-content/75 ring-1 ring-base-content/20 hover:ring-base-content/40 transition">
