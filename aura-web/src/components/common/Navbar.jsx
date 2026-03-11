@@ -102,6 +102,26 @@ export default function Navbar({
 
             {/* Right — ThemeButton + mobile hamburger only (no login/register) */}
             <div className="flex items-center gap-2 z-10">
+              {/* External Links */}
+              <div className="hidden lg:flex items-center gap-2 mr-2">
+                <a
+                  href="https://survey.auraui.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-sm btn-ghost border border-base-content/20 hover:bg-base-200"
+                >
+                  Support collecting Datasets
+                </a>
+                <a
+                  href="http://beta-testing.auraui.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-sm btn-primary"
+                >
+                  Join Beta Testing
+                </a>
+              </div>
+
               <ThemeButton />
 
               {/* Mobile hamburger */}
@@ -207,6 +227,25 @@ export default function Navbar({
               </NavLink>
             )
           )}
+
+          <div className="pt-4 mt-2 border-t border-base-300 flex flex-col gap-2">
+            <a
+              href="https://survey.auraui.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-ghost border border-base-content/20 hover:bg-base-200 w-full"
+            >
+              Support collecting Datasets
+            </a>
+            <a
+              href="http://beta-testing.auraui.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary w-full"
+            >
+              Join Beta Testing
+            </a>
+          </div>
         </nav>
       </div>
     </>
