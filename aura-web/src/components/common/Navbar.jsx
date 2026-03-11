@@ -113,7 +113,7 @@ export default function Navbar({
                   Support collecting Datasets
                 </a>
                 <a
-                  href="http://beta-testing.auraui.org/"
+                  href="https://auraui-beta.boidev.cloud/register"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-sm btn-primary"
