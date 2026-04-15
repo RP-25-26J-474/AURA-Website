@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../../components/common/SEO";
 
 const stats = [
   { label: "Competitive advantage", value: "~90%", note: "No direct end-to-end competitors" },
@@ -37,6 +38,11 @@ const audiences = [
 export default function Pricing() {
   return (
     <div className="bg-base-100">
+      <SEO 
+        title="Pricing" 
+        description="AURA is free for end users and developers. Explore our flexible licensing for production websites and special rates for non-profits." 
+        canonical="/pricing" 
+      />
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden py-24 px-6 lg:px-8 text-center">

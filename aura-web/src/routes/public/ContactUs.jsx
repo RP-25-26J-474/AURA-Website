@@ -1,4 +1,4 @@
-
+import SEO from "../../components/common/SEO";
 
 const CONTACT_EMAIL = "dev.auraui@gmail.com";
 
@@ -12,6 +12,11 @@ const demoPerks = [
 export default function ContactUs() {
   return (
     <div className="bg-base-100">
+      <SEO 
+        title="Contact Us" 
+        description="Get in touch with the AURA team for enterprise enquiries, support, or to request a live demo of our adaptive UI personalization." 
+        canonical="/contact-us" 
+      />
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden min-h-[55vh] flex flex-col items-center justify-center px-6 lg:px-8 text-center py-16">
