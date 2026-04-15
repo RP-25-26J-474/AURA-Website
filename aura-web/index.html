@@ -1,13 +1,49 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/aura.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>aura-web</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/aura.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aura - Unleash the future of UI with our modern, high-performance UI components and layout systems. Build faster, look better." />
+  <meta name="keywords" content="UI, UI components, React, Tailwind CSS, Aura, Web Design, Frontend Development" />
+  <meta name="author" content="Aura Team" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aura-ui.com/" />
+  <meta property="og:title" content="Aura | Unleash the future of UI" />
+  <meta property="og:description" content="Build stunning user interfaces in record time with Aura's elite component library." />
+  <meta property="og:image" content="https://aura-ui.com/og-image.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://aura-ui.com/" />
+  <meta property="twitter:title" content="Aura | Unleash the future of UI" />
+  <meta property="twitter:description" content="Build stunning user interfaces in record time with Aura's elite component library." />
+  <meta property="twitter:image" content="https://aura-ui.com/og-image.png" />
+
+  <link rel="canonical" href="https://aura-ui.com/" />
+  <link href="/src/style.css" rel="stylesheet">
+  <title>Aura | Unleash the future of UI</title>
+  <!--
+      Apply saved theme BEFORE React mounts to eliminate the white flash.
+      Reads localStorage synchronously and sets data-theme on <html>.
+      Falls back to "dark" if no preference saved.
+    -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { }
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

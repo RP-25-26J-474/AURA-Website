@@ -1,0 +1,103 @@
+import { Outlet, NavLink, Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { logos } from "../assets";
+
+export default function DevLayout() {
+  const { user, logout } = useAuth();
+
+  return (
+    <div className="min-h-screen bg-base-300 text-slate-100 flex">
+      {/* Sidebar */}
+      <aside className="hidden md:flex w-64 flex-col border-r border-primary/40 bg-base-200/80">
+        <div className="px-4 py-4 border-b border-primary/40 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logos.aura} alt="AURA Logo" className="h-6 w-auto" />
+            <span className="font-semibold tracking-tight text-sm">
+              Developer Console
+            </span>
+          </Link>
+        </div>
+
+        <nav className="flex-1 px-3 py-4 text-sm space-y-1">
+          <SectionLabel label="Overview" />
+          <NavItem to="/dev/dashboard" label="Dashboard" />
+          <NavItem to="/dev/projects" label="Projects" />
+
+          <SectionLabel label="Manage" />
+          <NavItem to="/dev/settings" label="Settings" />
+          {/* future: API keys, webhooks, billing, etc. */}
+        </nav>
+
+        <div className="px-4 py-4 border-t border-primary/40 text-xs text-slate-400">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="font-medium text-slate-200 truncate max-w-[9rem]">
+                {user?.name || "Developer"}
+              </div>
+              <div className="truncate max-w-[9rem]">
+                {user?.email || "user@example.com"}
+              </div>
+            </div>
+            <button
+              onClick={logout}
+              className="text-xs text-slate-400 hover:text-red-400"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <div className="flex-1 flex flex-col">
+        {/* Top bar */}
+        <header className="h-14 border-b border-primary/40 flex items-center justify-between px-4">
+          <div className="font-medium text-sm text-slate-200">
+            Developer Console
+          </div>
+          <div className="flex items-center gap-3">
+            {/* little pills for environment, etc. */}
+            <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/30">
+              Sandbox
+            </span>
+            <span className="hidden sm:inline text-xs text-slate-400">
+              Role: <span className="text-slate-200">{user?.role}</span>
+            </span>
+          </div>
+        </header>
+
+        {/* Scrollable content */}
+        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-base-300 via-base-100 to-base-200">
+          <div className="max-w-8xl mx-auto px-12 py-8">
+            <Outlet />
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function SectionLabel({ label }) {
+  return (
+    <div className="mt-4 mb-1 text-md tracking-wide text-base-content font-semibold">
+      {label}
+    </div>
+  );
+}
+
+function NavItem({ to, label }) {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        [
+          "flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-300 hover:bg-slate-800/70 hover:text-white transition text-sm",
+          isActive ? "bg-primary/20 text-white border border-primary/40" : "",
+        ].join(" ")
+      }
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-slate-600" />
+      <span>{label}</span>
+    </NavLink>
+  );
+}
