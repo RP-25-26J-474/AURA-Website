@@ -19,9 +19,6 @@ import DevDashboard from "./routes/developer/DevDashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { AdaptiveProvider } from "@aura-adaptive/aura-ui-adaptor";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-const RL_URL = import.meta.env.VITE_RL_URL || "http://localhost:8000/rl";
-
 function AppWithAdaptive() {
   const { user } = useAuthContext();
   const userId = user?.id || "u_001";
@@ -29,8 +26,6 @@ function AppWithAdaptive() {
   return (
     <AdaptiveProvider
       userId={userId}
-      apiEndpoint={API_URL}
-      rlEndpoint={RL_URL}
     >
       <Routes>
         <Route element={<LandingLayout />}>

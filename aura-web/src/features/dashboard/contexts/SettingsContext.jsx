@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { DEFAULT_AURA_API_ENDPOINT } from "@aura-adaptive/aura-ui-adaptor";
 
 const SettingsContext = createContext();
+const API_BASE_URL = DEFAULT_AURA_API_ENDPOINT;
 
 export function useSettings() {
   const context = useContext(SettingsContext);
@@ -44,7 +46,6 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
 
   // Subscribe to real-time settings changes via SSE (receives changes from Novacart feedback)
   useEffect(() => {
-    const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.origin + '/api');
     const url = `${API_BASE_URL}/settings/events/${userId}`;
     let es = null;
     let retryTimer = null;
@@ -85,7 +86,6 @@ export function SettingsProvider({ children, userId = 'u_001' }) {
 
   const loadUserSettings = async () => {
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.origin + '/api');
       // Use the settings endpoint (GET /api/settings/:userId) which reads from UserSettings collection
       const response = await fetch(`${API_BASE_URL}/settings/${userId}`);
       const data = await response.json();

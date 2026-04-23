@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { DEFAULT_AURA_API_ENDPOINT } from "@aura-adaptive/aura-ui-adaptor";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+const API_BASE_URL = DEFAULT_AURA_API_ENDPOINT;
 
 /**
  * Notify the AURA extension (if installed) about a settings change.
