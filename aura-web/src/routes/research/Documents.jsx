@@ -52,7 +52,7 @@ export default function Documents() {
           <FaLock />
         </div>
         <h4 className="text-xl font-bold text-base-content mb-2">Access Restricted</h4>
-        <p className="text-base-content/50 text-sm max-w-md">
+        <p className="text-base-content/50 text-sm max-w-md text-justify">
           Research documents are currently restricted to authorized personnel and academic evaluators. Links will be made public upon final publication.
         </p>
       </div>

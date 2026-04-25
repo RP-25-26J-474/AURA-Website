@@ -52,7 +52,7 @@ export default function Presentations() {
           <FaFilePowerpoint />
         </div>
         <h4 className="text-xl font-bold text-base-content mb-2">Available Soon</h4>
-        <p className="text-base-content/50 text-sm max-w-md">
+        <p className="text-base-content/50 text-sm max-w-md text-justify">
           Presentation slides are undergoing final revisions. Links will be active after each respective milestone is completed and verified.
         </p>
       </div>

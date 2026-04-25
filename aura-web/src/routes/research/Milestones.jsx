@@ -20,17 +20,11 @@ const milestones = [
     description: "Demonstration of core ML models and adaptation layer integration.",
   },
   {
-    title: "Final Assessment",
+    title: "Final Assessment & Viva",
     date: "Semester 2",
     status: "upcoming",
     description: "Comprehensive evaluation of the entire AURA framework and user studies.",
-  },
-  {
-    title: "Viva Voce",
-    date: "Semester 2",
-    status: "upcoming",
-    description: "Final oral defense of the research project and findings.",
-  },
+  }
 ];
 
 const StatusBadge = ({ status }) => {
@@ -72,7 +66,7 @@ export default function Milestones() {
                     <h3 className="text-xl font-bold text-base-content mt-3 group-hover:text-primary transition-colors">{ms.title}</h3>
                   </div>
                   <p className="text-xs font-mono text-primary/60 mb-3 font-bold uppercase tracking-widest">{ms.date}</p>
-                  <p className="text-base-content/60 text-sm leading-relaxed">
+                  <p className="text-base-content/60 text-sm leading-relaxed text-justify">
                     {ms.description}
                   </p>
                 </div>
@@ -88,7 +82,7 @@ export default function Milestones() {
       
       <div className="mt-20 p-8 rounded-3xl bg-primary/5 border border-primary/10 text-center">
         <h4 className="text-primary font-bold mb-2">Ongoing Progress</h4>
-        <p className="text-base-content/60 text-sm">
+        <p className="text-base-content/60 text-sm text-justify">
           We are currently focusing on the second progress presentation and refining our adaptation algorithms.
         </p>
       </div>
