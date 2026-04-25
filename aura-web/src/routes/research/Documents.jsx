@@ -35,7 +35,7 @@ export default function Documents() {
   return (
     <div className="animate-in fade-in zoom-in-95 duration-700">
       <header className="mb-12">
-        <h1 className="text-4xl font-extrabold text-base-content mb-4 tracking-tight">Project Documents</h1>
+        <h1 className="text-4xl font-bold text-base-content mb-4 tracking-tight">Project Documents</h1>
         <p className="text-lg text-base-content/50 max-w-2xl">
           Official documentation, reports, and administrative files related to the AURA project.
         </p>

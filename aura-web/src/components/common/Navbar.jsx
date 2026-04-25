@@ -229,7 +229,7 @@ export default function Navbar({
               rel="noopener noreferrer"
               className="btn btn-ghost border border-base-content/20 hover:bg-base-200 w-full"
             >
-              Support collecting Datasets
+              Support Us
             </a>
             <a
               href="http://beta-testing.auraui.org/"

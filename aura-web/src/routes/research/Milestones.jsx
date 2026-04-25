@@ -3,25 +3,21 @@ import { FaCircleCheck, FaCircleDot, FaClock } from "react-icons/fa6";
 const milestones = [
   {
     title: "Project Proposal",
-    date: "Semester 1",
     status: "completed",
     description: "Initial project outline, problem definition, and feasibility study.",
   },
   {
     title: "Progress Presentation - 1",
-    date: "Semester 1",
     status: "completed",
     description: "Presentation of initial research findings and prototype architecture.",
   },
   {
     title: "Progress Presentation - 2",
-    date: "Semester 2",
-    status: "in-progress",
+    status: "completed",
     description: "Demonstration of core ML models and adaptation layer integration.",
   },
   {
     title: "Final Assessment & Viva",
-    date: "Semester 2",
     status: "upcoming",
     description: "Comprehensive evaluation of the entire AURA framework and user studies.",
   }
@@ -42,9 +38,9 @@ export default function Milestones() {
   return (
     <div className="animate-in slide-in-from-bottom duration-700">
       <header className="mb-12">
-        <h1 className="text-4xl font-extrabold text-base-content mb-4 tracking-tight">Project Milestones</h1>
-        <p className="text-lg text-base-content/50 max-w-2xl">
-          Tracking the journey of AURA from conceptualization to final delivery.
+        <h1 className="text-4xl font-bold text-base-content mb-4 tracking-tight">Project Milestones</h1>
+        <p className="text-lg text-base-content/50 text-justify">
+          The AURA research project is being developed and evaluated by undergraduate students at the <strong>Sri Lanka Institute of Information Technology (SLIIT)</strong>. Our work is subjected to assessment by a panel of research experts and academic supervisors throughout the project lifecycle.
         </p>
       </header>
 
@@ -60,13 +56,12 @@ export default function Milestones() {
 
               {/* Content Card */}
               <div className="w-full md:w-[45%] pl-12 md:pl-0">
-                <div className={`p-6 rounded-3xl bg-base-100 border border-base-300 hover:border-primary/50 transition-all duration-300 hover:shadow-xl group ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
+                <div className={`p-6 rounded-3xl bg-base-100 border border-primary/50 transition-all duration-300 hover:shadow-xl group ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
                   <div className={`flex flex-col mb-2 ${i % 2 === 0 ? "md:items-end" : "md:items-start"}`}>
                     <StatusBadge status={ms.status} />
                     <h3 className="text-xl font-bold text-base-content mt-3 group-hover:text-primary transition-colors">{ms.title}</h3>
                   </div>
-                  <p className="text-xs font-mono text-primary/60 mb-3 font-bold uppercase tracking-widest">{ms.date}</p>
-                  <p className="text-base-content/60 text-sm leading-relaxed text-justify">
+                  <p className="text-base-content/60 text-sm leading-relaxed">
                     {ms.description}
                   </p>
                 </div>
@@ -80,12 +75,6 @@ export default function Milestones() {
         </div>
       </div>
       
-      <div className="mt-20 p-8 rounded-3xl bg-primary/5 border border-primary/10 text-center">
-        <h4 className="text-primary font-bold mb-2">Ongoing Progress</h4>
-        <p className="text-base-content/60 text-sm text-justify">
-          We are currently focusing on the second progress presentation and refining our adaptation algorithms.
-        </p>
-      </div>
     </div>
   );
 }

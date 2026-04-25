@@ -35,7 +35,7 @@ export default function Presentations() {
   return (
     <div className="animate-in fade-in zoom-in-95 duration-700">
       <header className="mb-12">
-        <h1 className="text-4xl font-extrabold text-base-content mb-4 tracking-tight">Project Presentations</h1>
+        <h1 className="text-4xl font-bold text-base-content mb-4 tracking-tight">Project Presentations</h1>
         <p className="text-lg text-base-content/50 max-w-2xl">
           Visual materials and slide decks used for academic presentations and demonstrations.
         </p>

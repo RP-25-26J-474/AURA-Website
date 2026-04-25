@@ -44,7 +44,7 @@ export default function ResearchLayout() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <span className="text-sm font-medium text-base-content/60">Research Portal</span>
+          <span className="text-sm font-medium text-base-content/60">AURA Research</span>
         </div>
 
         <div className="max-w-4xl mx-auto px-6 py-10 lg:px-10 xl:px-12">

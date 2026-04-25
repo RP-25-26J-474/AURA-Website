@@ -18,7 +18,7 @@ export default function Domain() {
   return (
     <div className="animate-in fade-in duration-700">
       <header className="mb-12">
-        <h1 className="text-4xl font-extrabold text-base-content mb-4 tracking-tight">Project Domain</h1>
+        <h1 className="text-4xl font-bold text-base-content mb-4 tracking-tight">Project Domain</h1>
         <p className="text-lg text-base-content/50 max-w-2xl">
           Detailed overview of the AURA research project, including literature survey, gaps, objectives, and methodology.
         </p>
