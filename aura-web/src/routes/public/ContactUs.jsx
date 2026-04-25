@@ -1,6 +1,10 @@
 import SEO from "../../components/common/SEO";
+import ContactForm from "../../components/sections/ContactForm";
+import { HiMail } from "react-icons/hi";
+import { FaWhatsapp } from "react-icons/fa";
 
 const CONTACT_EMAIL = "dev.auraui@gmail.com";
+const CONTACT_PHONE = "+94 71 787 8383";
 
 const demoPerks = [
   { icon: "🤖", title: "See ML personalization live", desc: "Watch AURA adapt button sizes, font scales, and layout in real-time as user profiles change." },
@@ -35,12 +39,20 @@ export default function ContactUs() {
         </h1>
         <p className="mt-5 text-lg text-base-content/55 max-w-xl mx-auto">
           Questions, enterprise enquiries, or want to see AURA live? We're here.
-          <br />
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline font-medium">
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-primary px-8 flex items-center gap-2">
+            <HiMail className="text-xl" />
             {CONTACT_EMAIL}
           </a>
-        </p>
+          <a href={`https://wa.me/${CONTACT_PHONE.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-primary px-8 flex items-center gap-2">
+            <FaWhatsapp className="text-xl" />
+            {CONTACT_PHONE}
+          </a>
+        </div>
       </section>
+
+      <ContactForm />
 
       {/* Demo Section: Value of a live session */}
       <section className="border-t border-base-300 bg-base-200 py-24 px-6 lg:px-8">
@@ -83,10 +95,14 @@ export default function ContactUs() {
             >
               Request a demo
             </a>
-            <p className="mt-4 text-xs text-base-content/30">
-              Or email us directly at{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
-                {CONTACT_EMAIL}
+            <p className="mt-4 text-xs text-base-content/30 flex items-center justify-center gap-2 flex-wrap">
+              Or reach us directly at:
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline flex items-center gap-1">
+                <HiMail /> {CONTACT_EMAIL}
+              </a>
+              <span className="opacity-20">|</span>
+              <a href={`https://wa.me/${CONTACT_PHONE.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1">
+                <FaWhatsapp /> {CONTACT_PHONE}
               </a>
             </p>
           </div>
