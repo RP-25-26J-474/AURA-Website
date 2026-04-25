@@ -1,5 +1,6 @@
 import { FaBook, FaMagnifyingGlass, FaCircleExclamation, FaBullseye, FaGear, FaCode } from "react-icons/fa6";
 import { RESEARCH_TECHNOLOGIES, RESEARCH_OBJECTIVES } from "../../constants/research";
+import systemArch from "../../assets/images/system/system-architecture.png";
 
 const Section = ({ icon, title, children, id }) => (
   <section id={id} className="mb-16 scroll-mt-24">
@@ -99,6 +100,17 @@ export default function Domain() {
         <p className="mb-8">
           AURA follows a modular system engineering approach to provide real-time adaptive web interface personalization. The system is designed as an end-to-end framework that collects user interaction data, identifies user needs, generates personalization profiles, applies UI adaptations, and continuously improves the interface through feedback.
         </p>
+
+        <div className="mb-12 p-4 overflow-hidden group">
+          <img 
+            src={systemArch} 
+            alt="AURA System Architecture" 
+            className="w-full h-auto rounded-2xl group-hover:scale-[1.01] transition-transform duration-500"
+          />
+          <div className="mt-4 text-center">
+            <span className="text-xs font-bold uppercase tracking-widest text-base-content/30">AURA High-Level System Architecture</span>
+          </div>
+        </div>
         <div className="space-y-12">
           <div>
             <h4 className="text-xl font-bold text-base-content mb-4 flex items-center gap-2">
