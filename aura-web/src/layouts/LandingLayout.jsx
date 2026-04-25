@@ -24,6 +24,7 @@ export default function LandingLayout() {
               { label: "API Reference", to: "/docs/api-reference" },
             ],
           },
+          { label: "About Us", to: "/about-us" },
           { label: "Contact Us", to: "/contact-us" },
         ]}
         rightItems={[

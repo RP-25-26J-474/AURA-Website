@@ -44,7 +44,6 @@ export default function Pricing() {
         canonical="/pricing" 
       />
 
-      {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden py-24 px-6 lg:px-8 text-center">
         <div aria-hidden="true" className="absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden px-36 blur-3xl pointer-events-none">
           <div
@@ -62,7 +61,6 @@ export default function Pricing() {
         </p>
       </section>
 
-      {/* ── Market stats ────────────────────────────────── */}
       <section className="border-y border-base-300 bg-base-200">
         <div className="mx-auto max-w-5xl px-6 py-10 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           {stats.map((s) => (
@@ -75,7 +73,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── How it works ─────────────────────────────────── */}
       <section className="border-y border-base-300 bg-base-200 py-14 px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center mb-10">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">How it works</span>
@@ -114,7 +111,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── Tiers ─────────────────────────────────────────── */}
       <section className="py-20 px-6 lg:px-8">
         <div className="mx-auto max-w-5xl grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
 
@@ -205,7 +201,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── Special pricing callout ────────────────────────── */}
       <section className="py-6 px-6 lg:px-8">
         <div className="mx-auto max-w-3xl rounded-2xl border border-primary/20 bg-primary/5 px-7 py-6 flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <span className="text-3xl flex-shrink-0">🤝</span>
@@ -222,7 +217,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── Who it's for ──────────────────────────────────── */}
       <section className="bg-base-200 border-t border-base-300 py-20 px-6 lg:px-8 mt-10">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-12">
@@ -241,7 +235,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── Market context ────────────────────────────────── */}
       <section className="py-20 px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-12">
@@ -267,7 +260,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── Adoption roadmap ──────────────────────────────── */}
       <section className="bg-base-200 border-t border-base-300 py-20 px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Rollout</span>
@@ -290,7 +282,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── Final CTA ─────────────────────────────────────── */}
       <section className="py-20 px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold text-base-content">Ready to start building?</h2>
         <p className="mt-3 text-base-content/55 max-w-xl mx-auto">

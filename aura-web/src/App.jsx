@@ -10,6 +10,7 @@ import LandingPage from "./routes/public/LandingPage";
 import Pricing from "./routes/public/Pricing";
 import DocsLayout from "./routes/docs/DocsLayout";
 import ContactUs from "./routes/public/ContactUs";
+import AboutUs from "./routes/public/AboutUs";
 
 import LoginPage from "./routes/auth/LoginPage";
 import RegisterPage from "./routes/auth/RegisterPage";
@@ -27,6 +28,7 @@ function App() {
           <Route element={<LandingLayout />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
           </Route>
 

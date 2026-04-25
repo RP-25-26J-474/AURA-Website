@@ -108,7 +108,6 @@ html[data-theme="dark"] .glass-effect {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ─── Docs Markdown Content ─────────────────────────────────── */
 .docs-content {
   line-height: 1.8;
   font-size: 1rem;
