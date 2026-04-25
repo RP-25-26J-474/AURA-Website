@@ -5,12 +5,19 @@ import LandingLayout from "./layouts/LandingLayout";
 import DocsShellLayout from "./layouts/DocsShellLayout";
 import DeveloperLayout from "./layouts/DevLayout";
 import ClientLayout from "./layouts/ClientLayout";
+import ResearchLayout from "./routes/research/ResearchLayout";
+
 
 import LandingPage from "./routes/public/LandingPage";
 import Pricing from "./routes/public/Pricing";
 import DocsLayout from "./routes/docs/DocsLayout";
 import ContactUs from "./routes/public/ContactUs";
 import AboutUs from "./routes/public/AboutUs";
+import Domain from "./routes/research/Domain";
+import Milestones from "./routes/research/Milestones";
+import Documents from "./routes/research/Documents";
+import Presentations from "./routes/research/Presentations";
+
 
 import LoginPage from "./routes/auth/LoginPage";
 import RegisterPage from "./routes/auth/RegisterPage";
@@ -35,6 +42,17 @@ function App() {
           {/* Docs */}
           <Route path="/docs" element={<DocsShellLayout />}>
             <Route path="*" element={<DocsLayout />} />
+          </Route>
+
+          {/* Research */}
+          <Route path="/research" element={<DocsShellLayout />}>
+            <Route element={<ResearchLayout />}>
+              <Route index element={<Navigate to="domain" replace />} />
+              <Route path="domain" element={<Domain />} />
+              <Route path="milestones" element={<Milestones />} />
+              <Route path="documents" element={<Documents />} />
+              <Route path="presentations" element={<Presentations />} />
+            </Route>
           </Route>
 
           {/* Auth */}

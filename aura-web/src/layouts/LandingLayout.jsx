@@ -23,6 +23,7 @@ export default function LandingLayout() {
             ],
           },
           { label: "Pricing", to: "/pricing" },
+          { label: "Research", to: "/research" },
           { label: "About Us", to: "/about-us" },
           { label: "Contact Us", to: "/contact-us" },
         ]}
