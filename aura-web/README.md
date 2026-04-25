@@ -1,16 +1,73 @@
-# React + Vite
+# AURA Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive web application for AURA, featuring adaptive UI personalization and research documentation.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Adaptive UI Research**: Documentation and presentations on ML-driven UI personalization.
+- **Contact System**:
+  - **Interactive Contact Form**: Powered by EmailJS for seamless email notifications.
+  - **WhatsApp Integration**: Direct chat link for instant communication.
+- **Modern Aesthetic**: Built with React, Vite, TailwindCSS, and DaisyUI for a premium dark-themed look.
+- **SEO Optimized**: Dynamic meta tags and titles for every page.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 19, Vite
+- **Styling**: TailwindCSS, DaisyUI
+- **Communication**: EmailJS, React Icons
+- **Routing**: React Router 7
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (Latest LTS recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd aura-web
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Configuration
+
+Create a `.env` file in the root directory and add your EmailJS credentials:
+
+```env
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+### Running Locally
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`.
+
+## Deployment
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+The output will be in the `dist/` directory.
+
+---
+
+Built with ❤️ by the AURA Team.
