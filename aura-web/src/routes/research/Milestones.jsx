@@ -46,7 +46,7 @@ export default function Milestones() {
 
       <div className="relative">
         {/* Timeline Line */}
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-base-300 hidden md:block" />
+        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-base-300" />
 
         <div className="space-y-12">
           {milestones.map((ms, i) => (
