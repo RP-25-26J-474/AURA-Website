@@ -49,6 +49,7 @@ export default function AboutUs() {
         description="Meet the passionate team behind AURA, dedicated to unleashing the future of UI through ML-powered personalization." 
         canonical="/about-us" 
       />
+      {/* Hero Section: Team Introduction */}
       <section className="relative isolate overflow-hidden min-h-[55vh] flex flex-col items-center justify-center px-6 lg:px-8 text-center py-16">
         <div aria-hidden="true" className="absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden px-36 blur-3xl pointer-events-none">
           <div
@@ -69,6 +70,7 @@ export default function AboutUs() {
         </p>
       </section>
 
+      {/* Team Grid: Member Profiles */}
       <section className="border-t border-base-300 bg-base-200 py-24 px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-16">
@@ -127,6 +129,7 @@ export default function AboutUs() {
         </div>
       </section>
 
+      {/* Mission Statement: Core Values */}
       <section className="py-24 px-6 lg:px-8 text-center bg-base-100">
         <div className="mx-auto max-w-4xl px-8 py-12 rounded-3xl border border-primary/20 bg-primary/5 relative overflow-hidden">
           <div aria-hidden="true" className="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/10 blur-3xl rounded-full"></div>
@@ -142,6 +145,7 @@ export default function AboutUs() {
         </div>
       </section>
 
+      {/* Contact CTA: Footer for the About page */}
       <section className="border-t border-base-300 bg-base-200 py-20 px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold text-base-content">Interested in our work?</h2>
         <p className="mt-3 text-base-content/55 max-w-xl mx-auto">

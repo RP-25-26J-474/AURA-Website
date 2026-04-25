@@ -24,7 +24,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Landing / marketing */}
+          {/* Landing Page*/}
           <Route element={<LandingLayout />}>
             <Route path="/" element={<LandingPage />} />
             <Route path="/pricing" element={<Pricing />} />
@@ -32,7 +32,7 @@ function App() {
             <Route path="/contact-us" element={<ContactUs />} />
           </Route>
 
-          {/* Docs — own shell, no footer, sticky sidebar */}
+          {/* Docs */}
           <Route path="/docs" element={<DocsShellLayout />}>
             <Route path="*" element={<DocsLayout />} />
           </Route>

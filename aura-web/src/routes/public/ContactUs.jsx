@@ -18,6 +18,7 @@ export default function ContactUs() {
         canonical="/contact-us" 
       />
 
+      {/* Hero Section: General Enquiries */}
       <section className="relative isolate overflow-hidden min-h-[55vh] flex flex-col items-center justify-center px-6 lg:px-8 text-center py-16">
         <div aria-hidden="true" className="absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden px-36 blur-3xl pointer-events-none">
           <div
@@ -41,6 +42,7 @@ export default function ContactUs() {
         </p>
       </section>
 
+      {/* Demo Section: Value of a live session */}
       <section className="border-t border-base-300 bg-base-200 py-24 px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-14">

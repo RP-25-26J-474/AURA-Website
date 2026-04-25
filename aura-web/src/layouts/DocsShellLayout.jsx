@@ -1,11 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 
-/**
- * DocsShellLayout — wraps the /docs route.
- * No footer (docs pages are self-contained), navbar is shared.
- * The inner DocsLayout handles the sidebar+content split.
- */
 export default function DocsShellLayout() {
     return (
         <div className="min-h-screen flex flex-col bg-base-100">

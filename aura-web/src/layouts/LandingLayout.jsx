@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 
-/** Pages that show the full footer */
 const FULL_FOOTER_PATHS = ["/"];
 
 export default function LandingLayout() {

@@ -44,6 +44,7 @@ export default function Pricing() {
         canonical="/pricing" 
       />
 
+      {/* Hero Section: Value Proposition */}
       <section className="relative isolate overflow-hidden min-h-[55vh] flex flex-col items-center justify-center px-6 lg:px-8 text-center py-16">
         <div aria-hidden="true" className="absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden px-36 blur-3xl pointer-events-none">
           <div
@@ -61,6 +62,7 @@ export default function Pricing() {
         </p>
       </section>
 
+      {/* Key Market Stats & Advantage */}
       <section className="border-y border-base-300 bg-base-200">
         <div className="mx-auto max-w-5xl px-6 py-10 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           {stats.map((s) => (
@@ -73,6 +75,7 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Ecosystem Explanation: How components work together */}
       <section className="border-y border-base-300 bg-base-200 py-14 px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center mb-10">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">How it works</span>
@@ -201,6 +204,7 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* Special Initiatives: Charity and Education */}
       <section className="py-6 px-6 lg:px-8">
         <div className="mx-auto max-w-3xl rounded-2xl border border-primary/20 bg-primary/5 px-7 py-6 flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <span className="text-3xl flex-shrink-0">🤝</span>
