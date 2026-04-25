@@ -1,4 +1,5 @@
 import { FaBook, FaMagnifyingGlass, FaCircleExclamation, FaBullseye, FaGear, FaCode } from "react-icons/fa6";
+import { RESEARCH_TECHNOLOGIES, RESEARCH_OBJECTIVES } from "../../constants/research";
 
 const Section = ({ icon, title, children, id }) => (
   <section id={id} className="mb-16 scroll-mt-24">
@@ -19,7 +20,7 @@ export default function Domain() {
     <div className="animate-in fade-in duration-700">
       <header className="mb-12">
         <h1 className="text-4xl font-bold text-base-content mb-4 tracking-tight">Project Domain</h1>
-        <p className="text-lg text-base-content/50 max-w-2xl">
+        <p className="text-lg text-base-content/50">
           Detailed overview of the AURA research project, including literature survey, gaps, objectives, and methodology.
         </p>
       </header>
@@ -83,14 +84,7 @@ export default function Domain() {
 
         <h4 className="text-lg font-bold text-base-content mb-4">Specific Objectives</h4>
         <div className="space-y-4">
-          {[
-            "To develop a browser-based mechanism for capturing and analyzing user interaction data.",
-            "To design a gamified onboarding process to assess visual perception, motor coordination, color vision, and digital literacy.",
-            "To implement machine learning models that identify user behavior patterns and infer accessibility needs.",
-            "To apply real-time UI adaptations such as typography scaling, layout adjustment, color modification, spacing changes, and interaction target resizing.",
-            "To design a reusable frontend component architecture that allows adaptive UI features to be integrated into modern web applications.",
-            "To evaluate the effectiveness of the proposed system using usability, accessibility, interaction accuracy, and user satisfaction measures."
-          ].map((obj, i) => (
+          {RESEARCH_OBJECTIVES.map((obj, i) => (
             <div key={i} className="flex gap-4 p-4 rounded-xl hover:bg-base-200 transition-colors">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-content flex items-center justify-center font-bold text-sm">
                 {i + 1}
@@ -194,32 +188,7 @@ export default function Domain() {
 
       <Section icon={<FaCode />} title="Technologies Used" id="technologies">
         <div className="space-y-10">
-          {[
-            {
-              title: "Frontend Development",
-              items: ["React.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Vite", "Context API", "Atomic Design"]
-            },
-            {
-              title: "Browser Extension",
-              items: ["Manifest V3", "Content Scripts", "Service Workers", "Storage API", "Event Tracking"]
-            },
-            {
-              title: "ML & Backend",
-              items: ["Python", "FastAPI", "scikit-learn", "PyTorch", "XGBoost", "Isolation Forest", "KNN", "Autoencoders", "RL"]
-            },
-            {
-              title: "NPM & Infrastructure",
-              items: ["Node.js", "npm", "Component Library", "AdaptiveProvider", "Design Tokens", "Profile Inspector"]
-            },
-            {
-              title: "Database & Storage",
-              items: ["MongoDB", "Local Storage", "Session Storage", "Chrome Local Storage"]
-            },
-            {
-              title: "Testing & Evaluation",
-              items: ["Unit Testing", "Integration Testing", "Profile Simulation", "User Evaluation", "SUS", "Interaction Metrics"]
-            }
-          ].map((tech) => (
+          {RESEARCH_TECHNOLOGIES.map((tech) => (
             <div key={tech.title} className="pb-8 border-b border-base-200 last:border-0">
               <h4 className="font-bold text-base-content mb-5 flex items-center gap-3 text-lg">
                 <div className="w-2 h-2 rounded-full bg-primary" />

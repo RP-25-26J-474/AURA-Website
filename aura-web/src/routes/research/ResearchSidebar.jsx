@@ -19,14 +19,15 @@ const sections = [
 ];
 
 export default function ResearchSidebar({ onNavigate }) {
+  const currentYear = new Date().getFullYear();
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
       <div className="px-4 pt-6 pb-4 border-b border-base-300">
         <h2 className="text-lg font-bold text-base-content flex items-center gap-2">
-           AURA Research
+          AURA Research
         </h2>
-        <p className="text-xs text-base-content/35 mt-1 ml-0.5">AURA Adaptive UI Framework</p>
+        <p className="text-xs text-base-content/35 mt-1 ml-0.5">AURA: Adaptive Web UI Personalization for Visual, Motor, and Literacy Diversity in Adults </p>
       </div>
 
       {/* Scrollable nav */}
@@ -61,7 +62,7 @@ export default function ResearchSidebar({ onNavigate }) {
 
       {/* Footer */}
       <div className="px-4 py-3 border-t border-base-300 text-[11px] text-base-content/30">
-         AURA Adaptive UI Framework
+        © {currentYear} AURA. All rights reserved.
       </div>
     </div>
   );

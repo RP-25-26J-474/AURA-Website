@@ -1,27 +1,5 @@
 import { FaCircleCheck, FaCircleDot, FaClock } from "react-icons/fa6";
-
-const milestones = [
-  {
-    title: "Project Proposal",
-    status: "completed",
-    description: "Initial project outline, problem definition, and feasibility study.",
-  },
-  {
-    title: "Progress Presentation - 1",
-    status: "completed",
-    description: "Presentation of initial research findings and prototype architecture.",
-  },
-  {
-    title: "Progress Presentation - 2",
-    status: "completed",
-    description: "Demonstration of core ML models and adaptation layer integration.",
-  },
-  {
-    title: "Final Assessment & Viva",
-    status: "upcoming",
-    description: "Comprehensive evaluation of the entire AURA framework and user studies.",
-  }
-];
+import { RESEARCH_MILESTONES } from "../../constants/research";
 
 const StatusBadge = ({ status }) => {
   switch (status) {
@@ -49,7 +27,7 @@ export default function Milestones() {
         <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-base-300" />
 
         <div className="space-y-12">
-          {milestones.map((ms, i) => (
+          {RESEARCH_MILESTONES.map((ms, i) => (
             <div key={ms.title} className={`relative flex flex-col md:flex-row items-center ${i % 2 === 0 ? "md:flex-row-reverse" : ""}`}>
               {/* Dot */}
               <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-base-100 border-4 border-primary z-10 shadow-lg" />
