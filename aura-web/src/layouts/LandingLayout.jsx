@@ -15,7 +15,6 @@ export default function LandingLayout() {
         brand="AURA"
         menuItems={[
           { label: "Home", to: "/" },
-          { label: "Pricing", to: "/pricing" },
           {
             label: "Docs",
             children: [
@@ -24,6 +23,7 @@ export default function LandingLayout() {
               { label: "API Reference", to: "/docs/api-reference" },
             ],
           },
+          { label: "Pricing", to: "/pricing" },
           { label: "About Us", to: "/about-us" },
           { label: "Contact Us", to: "/contact-us" },
         ]}
