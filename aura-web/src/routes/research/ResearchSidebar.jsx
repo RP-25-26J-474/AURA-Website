@@ -27,7 +27,18 @@ export default function ResearchSidebar({ onNavigate }) {
         <h2 className="text-lg font-bold text-base-content flex items-center gap-2">
           AURA Research
         </h2>
-        <p className="text-xs text-base-content/35 mt-1 ml-0.5">AURA: Adaptive Web UI Personalization for Visual, Motor, and Literacy Diversity in Adults </p>
+        <p className="text-[11px] leading-relaxed text-base-content/40 mt-1.5 ml-0.5">
+          AURA: Adaptive Web UI Personalization for Visual, Motor, and Literacy Diversity in Adults
+        </p>
+        <div className="mt-3 ml-0.5">
+          <span className="inline-flex items-center gap-2 px-2 py-0.5 rounded-md bg-primary/5 border border-primary/10 text-[10px] font-bold uppercase tracking-wider text-primary/60">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
+            </span>
+            Research Publication Pending
+          </span>
+        </div>
       </div>
 
       {/* Scrollable nav */}
