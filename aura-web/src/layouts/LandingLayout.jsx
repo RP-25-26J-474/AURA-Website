@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 
-/** Pages that show the full footer */
 const FULL_FOOTER_PATHS = ["/"];
 
 export default function LandingLayout() {
@@ -15,7 +14,6 @@ export default function LandingLayout() {
         brand="AURA"
         menuItems={[
           { label: "Home", to: "/" },
-          { label: "Pricing", to: "/pricing" },
           {
             label: "Docs",
             children: [
@@ -24,6 +22,9 @@ export default function LandingLayout() {
               { label: "API Reference", to: "/docs/api-reference" },
             ],
           },
+          { label: "Pricing", to: "/pricing" },
+          { label: "Research", to: "/research" },
+          { label: "About Us", to: "/about-us" },
           { label: "Contact Us", to: "/contact-us" },
         ]}
         rightItems={[

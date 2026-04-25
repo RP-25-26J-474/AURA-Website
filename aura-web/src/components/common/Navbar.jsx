@@ -42,10 +42,7 @@ export default function Navbar({
           }`}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* 3-column: brand | centered-nav (absolute) | right */}
           <div className="relative flex h-16 items-center justify-between">
-
-            {/* Brand — left */}
             <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 z-10">
               <img src={logos.aura} alt="AURA" className="h-8 w-8" />
               <span className="text-lg font-bold text-base-content">{brand}</span>
@@ -53,8 +50,6 @@ export default function Navbar({
                 {slogan}
               </span>
             </Link>
-
-            {/* Desktop nav — absolutely centered so it's ALWAYS in the true middle */}
             <nav className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
               {menuItems.map((item) =>
                 item.children ? (
@@ -65,7 +60,6 @@ export default function Navbar({
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
-                    {/* Dropdown */}
                     <div className="absolute top-full left-0 mt-1 w-48 rounded-xl bg-base-100 border border-base-300 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-1">
                       {item.children.map((sub) => (
                         <NavLink
@@ -100,17 +94,17 @@ export default function Navbar({
               )}
             </nav>
 
-            {/* Right — ThemeButton + mobile hamburger only (no login/register) */}
+
             <div className="flex items-center gap-2 z-10">
-              {/* External Links */}
               <div className="hidden lg:flex items-center gap-2 mr-2">
                 <a
                   href="https://survey.auraui.org/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-sm btn-ghost border border-base-content/20 hover:bg-base-200"
+                  className="btn btn-sm btn-ghost border border-base-content/20 hover:bg-base-200 tooltip tooltip-bottom"
+                  data-tip="Contribute to Dataset Collection"
                 >
-                  Support collecting Datasets
+                  Support Us
                 </a>
                 <a
                   href="https://auraui-beta.boidev.cloud/register"
@@ -118,7 +112,7 @@ export default function Navbar({
                   rel="noopener noreferrer"
                   className="btn btn-sm btn-primary"
                 >
-                  Join Beta Testing
+                  Join Beta
                 </a>
               </div>
 
@@ -235,7 +229,7 @@ export default function Navbar({
               rel="noopener noreferrer"
               className="btn btn-ghost border border-base-content/20 hover:bg-base-200 w-full"
             >
-              Support collecting Datasets
+              Support Us
             </a>
             <a
               href="http://beta-testing.auraui.org/"
@@ -243,7 +237,7 @@ export default function Navbar({
               rel="noopener noreferrer"
               className="btn btn-primary w-full"
             >
-              Join Beta Testing
+              Join Beta
             </a>
           </div>
         </nav>
