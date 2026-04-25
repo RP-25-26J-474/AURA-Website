@@ -44,7 +44,7 @@ export default function Pricing() {
         canonical="/pricing" 
       />
 
-      <section className="relative isolate overflow-hidden py-24 px-6 lg:px-8 text-center">
+      <section className="relative isolate overflow-hidden min-h-[55vh] flex flex-col items-center justify-center px-6 lg:px-8 text-center py-16">
         <div aria-hidden="true" className="absolute inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden px-36 blur-3xl pointer-events-none">
           <div
             className="mx-auto aspect-[1155/678] w-[72rem] bg-gradient-to-tr from-primary to-secondary opacity-10"
