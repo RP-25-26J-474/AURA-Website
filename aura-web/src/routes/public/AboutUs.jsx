@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import SEO from "../../components/common/SEO";
-import { FaGithub, FaEnvelope } from "react-icons/fa6";
 import abhayawardhane from "../../assets/images/team/abhayawardhane.jpg";
 import dias from "../../assets/images/team/dias.webp";
 import rajapaksha from "../../assets/images/team/rajapaksha.jpg";
 import jayalath from "../../assets/images/team/jayalath.webp";
+import jagath from "../../assets/images/team/mrjagath.jpg";
+import madusha from "../../assets/images/team/msmadusha.jpg";
+import { FaGithub, FaEnvelope, FaLinkedin } from "react-icons/fa6";
 
 const teamMembers = [
   {
@@ -38,6 +40,23 @@ const teamMembers = [
     image: jayalath,
     role: "Backend Architect",
     bio: "Architecting the cloud infrastructure for ML profile generation."
+  }
+];
+
+const supervisors = [
+  {
+    name: "Mr. Jagath Wickramarathne",
+    role: "Supervisor",
+    image: jagath,
+    bio: "Senior Lecturer at SLIIT. Researcher in Human-Computer Interaction & User Experience Design.",
+    linkedin: "https://www.linkedin.com/in/jagath-wickramarathne-7aa79516/"
+  },
+  {
+    name: "Ms. Madusha Weerasooriya",
+    role: "Co-Supervisor",
+    image: madusha,
+    bio: "Assistant Lecturer at SLIIT. Reading MPhil at SLIIT, Sri Lanka.",
+    linkedin: "https://www.linkedin.com/in/madusha-weerasooriya-6775861a1/"
   }
 ];
 
@@ -129,8 +148,66 @@ export default function AboutUs() {
         </div>
       </section>
 
+      {/* Supervisor Section */}
+      <section className="border-t border-base-300 bg-base-100 py-24 px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-primary mb-3">
+              Research Guidance
+            </span>
+            <h2 className="text-4xl font-bold text-base-content">Guided by expertise</h2>
+            <p className="mt-4 text-base-content/55 max-w-xl mx-auto">
+              We are honored to be supervised by distinguished academics who have 
+              instrumentally shaped our research and development journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {supervisors.map((supervisor) => (
+              <div 
+                key={supervisor.name} 
+                className="group flex flex-col bg-base-100 rounded-2xl border border-base-300 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/30"
+              >
+                <div className="aspect-[4/5] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                  <img 
+                    src={supervisor.image} 
+                    alt={supervisor.name} 
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="mb-2">
+                    <span className="text-[10px] font-bold text-primary uppercase tracking-widest">{supervisor.role}</span>
+                    <h3 className="font-bold text-base-content group-hover:text-primary transition-colors">
+                      {supervisor.name}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-base-content/55 leading-relaxed flex-1">
+                    {supervisor.bio}
+                  </p>
+                  {supervisor.linkedin && (
+                    <div className="flex gap-3 mt-4">
+                      <a 
+                        href={supervisor.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn btn-circle btn-sm bg-base-200 text-primary border-none hover:bg-primary hover:text-white transition-all"
+                        aria-label="LinkedIn"
+                      >
+                        <FaLinkedin size={18} />
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Mission Statement: Core Values */}
-      <section className="py-24 px-6 lg:px-8 text-center bg-base-100">
+      <section className="py-24 px-6 lg:px-8 text-center bg-base-200 border-t border-base-300">
         <div className="mx-auto max-w-4xl px-8 py-12 rounded-3xl border border-primary/20 bg-primary/5 relative overflow-hidden">
           <div aria-hidden="true" className="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/10 blur-3xl rounded-full"></div>
           
@@ -146,7 +223,7 @@ export default function AboutUs() {
       </section>
 
       {/* Contact CTA: Footer for the About page */}
-      <section className="border-t border-base-300 bg-base-200 py-20 px-6 lg:px-8 text-center">
+      <section className="border-t border-base-300 bg-base-100 py-20 px-6 lg:px-8 text-center">
         <h2 className="text-3xl font-bold text-base-content">Interested in our work?</h2>
         <p className="mt-3 text-base-content/55 max-w-xl mx-auto">
           We're always open to collaborating with like-minded developers and organizations.

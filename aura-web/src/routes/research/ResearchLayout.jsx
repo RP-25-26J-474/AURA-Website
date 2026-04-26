@@ -22,7 +22,7 @@ export default function ResearchLayout() {
         className={`
           fixed lg:sticky top-16 z-40 lg:z-auto
           h-[calc(100vh-4rem)] w-72 lg:w-64 xl:w-72
-          bg-base-100 border-r border-base-300
+          bg-base-300 border-r border-base-300
           transform transition-transform duration-300 ease-in-out lg:transform-none
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
           overflow-y-auto flex-shrink-0

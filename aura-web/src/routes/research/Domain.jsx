@@ -210,7 +210,7 @@ export default function Domain() {
                 {tech.items.map((item) => (
                   <span 
                     key={item} 
-                    className="px-3 py-1 rounded-full bg-base-200 text-base-content/70 text-xs font-semibold border border-base-300 hover:bg-base-300 transition-colors"
+                    className="px-3 py-1 rounded-full bg-base-100 text-base-content/70 text-xs font-semibold border border-base-300 hover:bg-base-300 transition-colors"
                   >
                     {item}
                   </span>
