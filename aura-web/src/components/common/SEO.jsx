@@ -14,13 +14,13 @@ const SEO = ({
   description, 
   canonical, 
   type = 'website', 
-  image = 'https://aura-ui.com/og-image.png' 
+  image = 'https://auraui.org/og-image.png' 
 }) => {
   const siteTitle = 'Aura | Unleash the future of UI';
   const fullTitle = title ? `${title} | Aura` : siteTitle;
   const siteDescription = "Aura - Unleash the future of UI with our modern, high-performance UI components and layout systems.";
   const metaDescription = description || siteDescription;
-  const siteUrl = 'https://aura-ui.com';
+  const siteUrl = 'https://auraui.org';
   const url = canonical ? `${siteUrl}${canonical}` : siteUrl;
 
   return (
