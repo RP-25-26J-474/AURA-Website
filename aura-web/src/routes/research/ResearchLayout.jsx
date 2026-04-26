@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import DocsSidebar from "./DocsSidebar";
-import DocsContent from "./DocsContent";
+import { Outlet } from "react-router-dom";
 
-export default function DocsLayout() {
+import ResearchSidebar from "./ResearchSidebar";
+
+export default function ResearchLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex flex-1 overflow-hidden relative w-full">
+    <div className="flex flex-1 overflow-hidden relative w-full bg-base-100">
 
       {/* Mobile overlay */}
       {sidebarOpen && (
@@ -28,13 +28,13 @@ export default function DocsLayout() {
           overflow-y-auto flex-shrink-0
         `}
       >
-        <DocsSidebar onNavigate={() => setSidebarOpen(false)} />
+        <ResearchSidebar onNavigate={() => setSidebarOpen(false)} />
       </aside>
 
       {/* Main content area */}
-      <main className="flex-1 min-w-0 overflow-y-auto h-[calc(100vh-4rem)]">
+      <main className="flex-1 min-w-0 overflow-y-auto h-[calc(100vh-4rem)] scroll-smooth">
         {/* Mobile sidebar toggle */}
-        <div className="lg:hidden sticky top-0 z-20 bg-base-100 border-b border-base-300 px-4 py-2.5 flex items-center gap-3">
+        <div className="lg:hidden sticky top-0 z-20 bg-base-100/80 backdrop-blur border-b border-base-300 px-4 py-2.5 flex items-center gap-3">
           <button
             onClick={() => setSidebarOpen(true)}
             className="btn btn-ghost btn-sm btn-square"
@@ -44,14 +44,11 @@ export default function DocsLayout() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <span className="text-sm text-base-content/50">Documentation</span>
+          <span className="text-sm font-medium text-base-content/60">AURA Research</span>
         </div>
 
-        <div className="max-w-3xl mx-auto px-6 py-10 lg:px-10 xl:px-12">
-          <Routes>
-            <Route path="" element={<Navigate to="getting-started" replace />} />
-            <Route path="*" element={<DocsContent />} />
-          </Routes>
+        <div className="max-w-4xl mx-auto px-6 py-10 lg:px-10 xl:px-12">
+          <Outlet />
         </div>
       </main>
     </div>
