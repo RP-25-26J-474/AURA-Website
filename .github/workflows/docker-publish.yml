@@ -8,6 +8,7 @@ on:
       - '.github/workflows/docker-publish.yml'
   pull_request:
     branches: [ "deploy" ]
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -32,5 +33,61 @@ jobs:
         file: ./aura-web/Dockerfile
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ secrets.DOCKER_USERNAME }}/aura-frontend:latest
+        build-args: |
+          VITE_API_BASE_URL=${{ vars.AURA_FRONTEND_API_BASE_URL || 'http://4.194.234.251:4040' }}
+          VITE_EMAILJS_SERVICE_ID=${{ vars.AURA_FRONTEND_EMAILJS_SERVICE_ID || '' }}
+          VITE_EMAILJS_TEMPLATE_ID=${{ vars.AURA_FRONTEND_EMAILJS_TEMPLATE_ID || '' }}
+          VITE_EMAILJS_PUBLIC_KEY=${{ vars.AURA_FRONTEND_EMAILJS_PUBLIC_KEY || '' }}
         cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/aura-frontend:buildcache
         cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/aura-frontend:buildcache,mode=max
+
+  deploy-to-vps:
+    if: ${{ github.event_name != 'pull_request' }}
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy AURA Frontend to VPS
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: ${{ secrets.VPS_PORT || '22' }}
+        script_stop: true
+        script: |
+          set -eu
+
+          LOCK_DIR=/tmp/aura-deploy.lock
+          while ! mkdir "$LOCK_DIR" 2>/dev/null; do
+            sleep 2
+          done
+          trap 'rmdir "$LOCK_DIR"' EXIT
+
+          check_url() {
+            url="$1"
+            attempt=1
+            while [ "$attempt" -le 12 ]; do
+              if command -v curl > /dev/null 2>&1; then
+                if curl -fsS "$url" > /dev/null; then
+                  return 0
+                fi
+              elif wget -q -O /dev/null "$url"; then
+                return 0
+              fi
+              attempt=$((attempt + 1))
+              sleep 5
+            done
+            return 1
+          }
+
+          cd "${{ secrets.VPS_DEPLOY_PATH }}"
+          export DOCKER_USERNAME="${{ secrets.DOCKER_USERNAME }}"
+
+          docker compose pull aura-frontend
+          docker compose up -d --force-recreate --no-deps aura-frontend
+
+          check_url "http://127.0.0.1/" || {
+            docker compose ps aura-frontend
+            docker compose logs --tail 50 aura-frontend
+            exit 1
+          }
