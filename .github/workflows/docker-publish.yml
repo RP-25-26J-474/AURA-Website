@@ -82,27 +82,29 @@ jobs:
           }
 
           resolve_compose() {
-            if command -v docker-compose > /dev/null 2>&1; then
-              if docker-compose version > /dev/null 2>&1; then
+            if docker info > /dev/null 2>&1; then
+              if command -v docker-compose > /dev/null 2>&1; then
                 COMPOSE_BIN="docker-compose"
                 return 0
               fi
-              if sudo -n docker-compose version > /dev/null 2>&1; then
-                COMPOSE_BIN="sudo -n docker-compose"
+              if docker compose version > /dev/null 2>&1; then
+                COMPOSE_BIN="docker compose"
                 return 0
               fi
             fi
 
-            if docker compose version > /dev/null 2>&1; then
-              COMPOSE_BIN="docker compose"
-              return 0
-            fi
-            if sudo -n docker compose version > /dev/null 2>&1; then
-              COMPOSE_BIN="sudo -n docker compose"
-              return 0
+            if sudo -n docker info > /dev/null 2>&1; then
+              if command -v docker-compose > /dev/null 2>&1 && sudo -n docker-compose version > /dev/null 2>&1; then
+                COMPOSE_BIN="sudo -n docker-compose"
+                return 0
+              fi
+              if sudo -n docker compose version > /dev/null 2>&1; then
+                COMPOSE_BIN="sudo -n docker compose"
+                return 0
+              fi
             fi
 
-            echo "No usable docker compose command found on VPS"
+            echo "Docker daemon is not accessible for this SSH user. Add the user to the docker group or allow passwordless sudo for docker/docker-compose."
             exit 1
           }
 
