@@ -25,16 +25,16 @@ export const docsMap = {
   // Forms
   "components/adaptive-button": adaptiveButton,
   "components/adaptive-input": adaptiveInput,
-  "components/adaptive-textarea": adaptiveInput,   // same page
-  "components/adaptive-select": adaptiveInput,   // same page
-  "components/adaptive-checkbox": adaptiveInput,   // same page
-  "components/adaptive-switch": adaptiveInput,   // same page
+  "components/adaptive-textarea": adaptiveInput,
+  "components/adaptive-select": adaptiveInput,
+  "components/adaptive-checkbox": adaptiveInput,
+  "components/adaptive-switch": adaptiveInput,
 
   // Data Display
   "components/adaptive-text": adaptiveText,
   "components/adaptive-card": adaptiveCard,
   "components/adaptive-table": adaptiveTable,
-  "components/adaptive-list": adaptiveTable,      // same page
+  "components/adaptive-list": adaptiveTable,
 
   // Layout & Navigation
   "components/adaptive-grid": adaptiveLayout,
