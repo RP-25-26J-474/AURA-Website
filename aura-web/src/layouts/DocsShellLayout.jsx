@@ -1,11 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 
-/**
- * DocsShellLayout — wraps the /docs route.
- * No footer (docs pages are self-contained), navbar is shared.
- * The inner DocsLayout handles the sidebar+content split.
- */
 export default function DocsShellLayout() {
     return (
         <div className="min-h-screen flex flex-col bg-base-100">
@@ -13,7 +8,6 @@ export default function DocsShellLayout() {
                 brand="AURA"
                 menuItems={[
                     { label: "Home", to: "/" },
-                    { label: "Pricing", to: "/pricing" },
                     {
                         label: "Docs",
                         children: [
@@ -22,6 +16,9 @@ export default function DocsShellLayout() {
                             { label: "API Reference", to: "/docs/api-reference" },
                         ],
                     },
+                    { label: "Pricing", to: "/pricing" },
+                    { label: "Research", to: "/research" },
+                    { label: "About Us", to: "/about-us" },
                     { label: "Contact Us", to: "/contact-us" },
                 ]}
                 rightItems={[
