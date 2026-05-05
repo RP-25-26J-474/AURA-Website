@@ -37,23 +37,34 @@ import { AdaptiveButton } from "@aura-adaptive/aura-ui-adaptor";
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"primary" \| "secondary" \| "ghost" \| "danger"` | `"primary"` | Visual style |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Base size (adaptive engine may override) |
-| `disabled` | `boolean` | `false` | Disables the button |
-| `onClick` | `() => void` | — | Click handler |
-| `children` | `ReactNode` | — | Button label |
+| `variant` | `"primary" \| "secondary" \| "accent" \| "ghost"` | `"primary"` | Visual style |
+| `icon` | `ReactNode` | — | Icon node (SVG or component) to render inside the button |
+| `iconPosition` | `"left" \| "right"` | `"left"` | Placement of the icon relative to the text |
+| `iconOnly` | `boolean` | `false` | Explicitly request icon-only mode. Ensure you provide an `aria-label` |
+| `showText` | `boolean` | — | Force showing or hiding text regardless of heuristics |
+| `iconGapPx` | `number` | `8` | Gap in pixels between icon and text |
+| `textSize` | `string` | `typography.body` | Override text size (e.g., "14px") |
+| `minHitAreaPx` | `number` | `44` | Minimum dimensions to ensure a safe touch target size |
+| `paddingX` | `number` | `spacing.padX` | Horizontal padding override |
+| `paddingY` | `number` | `spacing.padY` | Vertical padding override |
+| `focusRingPx` | `number` | `3` | Width of the focus ring outline |
+| `textLabel` | `string` | — | Fallback text string if `children` is not provided |
+| `disabled` | `boolean` | `false` | Disables the button visually and functionally |
+| `onClick` | `(event) => void` | — | Click event handler |
 | `className` | `string` | — | Additional CSS classes |
+| `style` | `CSSProperties` | — | Additional inline styles |
 
 ---
 
 ## Adaptive Behavior
 
-When a motor impairment profile is active, `AdaptiveButton` automatically:
-- Increases `min-height` and `min-width` for easier tapping
-- Adds wider padding
-- Enlarges focus rings for keyboard navigation
+`AdaptiveButton` actively reads from the profile and updates behavior in real time:
+- **Motor Impairments**: Automatically enforces a minimum hit area of `44px` (or larger depending on user settings) and increases padding.
+- **Low Computer Literacy**: In `layoutSimplification` mode, the button avoids icon-only displays, enforcing text labels for clarity.
+- **Visual Impairments**: In `highContrast` mode, the focus rings and borders are dramatically darkened.
+- **Reduced Motion**: Disables scale and color transition animations on hover and active states.
 
-These overrides happen at the token level inside `AdaptiveProvider` — no extra props needed.
+Additionally, interactions with the button are automatically tracked for behavioral analysis using `BehaviorTracker`, sending feedback if the user experiences difficulty (e.g., rage clicks).
 
 ---
 
