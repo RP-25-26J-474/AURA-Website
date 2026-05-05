@@ -5,7 +5,7 @@ const DocCard = ({ doc }) => {
   const isLocked = !doc.url && doc.status === "locked";
   
   return (
-    <div className="group p-6 rounded-3xl bg-base-100 border border-base-300 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between">
+    <div className="group p-6 rounded-3xl bg-base-100 border border-primary/40 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between">
       <div className="mb-6">
         <div className="w-12 h-12 rounded-2xl bg-base-200 flex items-center justify-center text-primary text-2xl mb-4 group-hover:scale-110 transition-transform">
           <FaFilePdf />

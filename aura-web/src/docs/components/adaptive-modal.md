@@ -1,143 +1,105 @@
-# Overlay & Feedback Components
+# Adaptive Overlays & Feedback
 
-Components for notifications, confirmations, and contextual overlays in `@aura-adaptive/aura-ui-adaptor`.
+This documentation covers the core adaptive overlay and feedback components provided by the AURA UI Adaptor:
+- `AdaptiveAlert`
+- `AdaptiveDialog`
+- `AdaptiveDrawer`
+- `AdaptiveTooltip`
+
+These components automatically adapt their sizing, interaction models (e.g. hover vs click), and focus traps based on the active personalization profile.
+
+---
+
+## Import
+
+```jsx
+import { 
+  AdaptiveAlert, 
+  AdaptiveDialog, 
+  AdaptiveDrawer, 
+  AdaptiveTooltip 
+} from "@aura-adaptive/aura-ui-adaptor";
+```
 
 ---
 
 ## AdaptiveAlert
 
-Inline contextual message banner — ideal for form validation messages, info notices, and warnings.
-
-```jsx
-import { AdaptiveAlert } from "@aura-adaptive/aura-ui-adaptor";
-
-<AdaptiveAlert variant="success">Profile saved successfully!</AdaptiveAlert>
-<AdaptiveAlert variant="warning">Your session expires in 5 minutes.</AdaptiveAlert>
-<AdaptiveAlert variant="error">Please fix the errors below.</AdaptiveAlert>
-<AdaptiveAlert variant="info">This feature is currently in beta.</AdaptiveAlert>
-```
+An accessible, auto-dismissible alert banner.
 
 ### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Alert severity |
-| `children` | `ReactNode` | — | Alert message |
-| `onDismiss` | `function` | — | If provided, shows a close button |
+| `variant` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Semantic type of the alert |
+| `title` | `string` | Auto | Bold text at the top of the alert. Defaults to the variant name. |
+| `message` | `string` | — | Secondary descriptive text |
+| `showIcon` | `boolean` | `true` | Show or hide the leading icon |
+| `emphasis` | `"auto" \| "icon" \| "text" \| "balanced"` | `"auto"` | How to draw attention to the alert. |
+| `filled` | `boolean` | `false` | Enables a strong semi-transparent background color (useful for low-literacy users). |
+| `durationMs` | `number` | — | Automatically dismiss the alert after X milliseconds. |
+| `extendDurationForVisual`| `boolean`| `true` | Extends the `durationMs` automatically if a visual impairment profile is active. |
+| `onDismiss` | `() => void` | — | Callback fired when duration completes. |
 
 ---
 
 ## AdaptiveDialog
 
-A focused confirmation dialog with built-in action buttons. Blocks interaction with the rest of the page.
-
-```jsx
-import { AdaptiveDialog, AdaptiveButton } from "@aura-adaptive/aura-ui-adaptor";
-import { useState } from "react";
-
-function DeleteExample() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <AdaptiveButton variant="danger" onClick={() => setOpen(true)}>
-        Delete Item
-      </AdaptiveButton>
-      <AdaptiveDialog
-        open={open}
-        onClose={() => setOpen(false)}
-        title="Delete item?"
-        description="This action cannot be undone."
-        confirmLabel="Delete"
-        cancelLabel="Cancel"
-        onConfirm={handleDelete}
-        variant="danger"
-      />
-    </>
-  );
-}
-```
+A modal dialog with an automatic focus trap and backdrop locking.
 
 ### Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `open` | `boolean` | Controls visibility |
-| `onClose` | `function` | Called when dialog closes |
-| `title` | `string` | Dialog heading |
-| `description` | `string` | Body text |
-| `confirmLabel` | `string` | Confirm button label |
-| `cancelLabel` | `string` | Cancel button label |
-| `onConfirm` | `function` | Called when user confirms |
-| `variant` | `"default" \| "danger"` | Dialog style |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | **Required** | Controlled open state |
+| `onClose` | `() => void` | **Required** | Close handler |
+| `title` | `string` | `"Dialog"` | Accessible dialog title |
+| `description`| `string` | — | Secondary description text |
+| `actions` | `ReactNode` | `Close button`| Replaces the default action buttons at the bottom. |
+| `maxWidthPx` | `number` | `640` | Maximum width of the dialog box |
+| `textScale` | `number` | `1` | Font scale multiplier |
+| `showCloseIcon`| `boolean` | `true` | Renders a top-right '✕' button. |
+| `closeOnBackdrop`| `boolean`| `true` | Clicking the backdrop fires `onClose` |
 
 ---
 
 ## AdaptiveDrawer
 
-Side panel that slides in from left or right — useful for settings panels, detail views, and filters.
-
-```jsx
-import { AdaptiveDrawer, AdaptiveButton } from "@aura-adaptive/aura-ui-adaptor";
-import { useState } from "react";
-
-function SettingsDrawer() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <AdaptiveButton onClick={() => setOpen(true)}>Open Settings</AdaptiveButton>
-      <AdaptiveDrawer
-        open={open}
-        onClose={() => setOpen(false)}
-        side="right"
-        title="Settings"
-      >
-        <p>Settings content goes here.</p>
-      </AdaptiveDrawer>
-    </>
-  );
-}
-```
+A slide-out side drawer, ideal for mobile navigation or heavy filtering interfaces.
 
 ### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `open` | `boolean` | — | Controls visibility |
-| `onClose` | `function` | — | Called when drawer should close |
-| `side` | `"left" \| "right"` | `"right"` | Which side the drawer slides from |
-| `title` | `string` | — | Drawer heading |
-| `children` | `ReactNode` | — | Drawer content |
+| `open` | `boolean` | **Required** | Controlled open state |
+| `onClose` | `() => void` | **Required** | Close handler |
+| `title` | `string` | `"Menu"` | Drawer title |
+| `items` | `AdaptiveDrawerItem[]` | `[]` | Simple navigation list |
+| `onItemClick`| `(id) => void` | — | Fired when a nav item is clicked |
+| `widthPx` | `number` | Auto | Overrides default width. Expands automatically for `layoutSimplification`. |
+| `closeButtonSizePx` | `number`| Auto | Minimum height/width for the top-right close button. |
 
 ---
 
 ## AdaptiveTooltip
 
-Accessible tooltip shown on hover or keyboard focus. Adapts timing and size for motor profiles.
-
-```jsx
-import { AdaptiveTooltip, AdaptiveButton } from "@aura-adaptive/aura-ui-adaptor";
-
-<AdaptiveTooltip content="Copies the link to your clipboard">
-  <AdaptiveButton variant="ghost">Copy Link</AdaptiveButton>
-</AdaptiveTooltip>
-```
+An accessible tooltip wrapper that intelligently switches between hover and click triggers.
 
 ### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `content` | `string \| ReactNode` | — | Tooltip message |
-| `placement` | `"top" \| "bottom" \| "left" \| "right"` | `"top"` | Tooltip position |
-| `children` | `ReactNode` | — | The element the tooltip is anchored to |
+| `text` | `string` | **Required** | Tooltip text content |
+| `children` | `ReactElement`| **Required** | A single React element child to act as the trigger |
+| `trigger` | `"auto" \| "hover" \| "click"`| `"auto"` | How the tooltip opens. Defaults to hover but auto-switches to click for cognitive impairments. |
+| `placement` | `"top" \| "bottom"` | `"top"` | Placement relative to the trigger |
+| `enterDelayMs`| `number` | `300` | Delay before showing the tooltip on hover. Drops to 0 if `reducedMotion` is true. |
 
 ---
 
-## Adaptive Behavior
+## Adaptive Behaviors across Overlays
 
-| Profile | Overlay Adaptation |
-|---------|--------------------|
-| Motor impairment | Larger close targets, extended hover delay for tooltips |
-| Visual impairment | High-contrast dialog backgrounds, enlarged text |
-| Low literacy | Simplified dialog descriptions, prominent action buttons |
+- **Low Literacy / Simplification**: `<AdaptiveAlert>` defaults to `emphasis="text"` to make labels bold and unmistakable. `<AdaptiveTooltip>` forces its trigger to `"click"` because hover-discovered information can be lost easily. `<AdaptiveDrawer>` expands its default width to 360px to accommodate larger spacing.
+- **Motor Impairments**: Minimum target sizes for all close buttons (dialogs and drawers) scale up dynamically.
+- **Visual Impairments**: `<AdaptiveDialog>` and `<AdaptiveDrawer>` drop their box shadows and instead use thick, solid borders to establish boundaries. Overlay backdrops become darker (opacity goes from 0.45 to 0.6). `AdaptiveAlert` auto-extends its `durationMs` by 1.5x to give the user more time to read.
+- **Reduced Motion**: Disables slide-in animations for Drawers, pop-in animations for Dialogs, and fade delays for Tooltips.

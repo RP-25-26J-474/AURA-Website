@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaArrowRight, FaNpm, FaCopy, FaCheck } from "react-icons/fa6";
+import { FaArrowRight, FaNpm, FaCopy, FaCheck, FaChrome } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 function HeroSection() {
@@ -32,16 +32,25 @@ function HeroSection() {
         <div className="mx-auto max-w-3xl w-full">
           {/* Badge */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm/6 text-base-content/75 ring-1 ring-base-content/20 hover:ring-base-content/40 transition">
-              <span>Now on npm — v1.0.1&nbsp;</span>
+            <div className="relative rounded-full px-4 py-1 text-sm/6 text-base-content/75 ring-1 ring-base-content/20 hover:ring-base-content/40 transition flex items-center gap-2">
+              <span>Now on Chrome Store & npm</span>
+              <span className="w-px h-4 bg-base-content/20"></span>
+              <a
+                href="https://chromewebstore.google.com/detail/aura/likelgppeaoiocgebdepjbfmpnfncfan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-primary hover:underline"
+              >
+                Extension
+              </a>
+              <span className="text-base-content/30">•</span>
               <a
                 href="https://www.npmjs.com/package/@aura-adaptive/aura-ui-adaptor"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-primary"
+                className="font-semibold text-primary hover:underline"
               >
-                <span aria-hidden="true" className="absolute inset-0" />
-                View on npm →
+                npm →
               </a>
             </div>
           </div>
@@ -74,7 +83,7 @@ function HeroSection() {
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 flex items-center justify-center gap-x-4">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/docs/getting-started" className="btn btn-primary btn-lg">
                 Get Started
               </Link>
@@ -82,9 +91,18 @@ function HeroSection() {
                 href="https://www.npmjs.com/package/@aura-adaptive/aura-ui-adaptor"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-ghost btn-lg"
+                className="btn btn-outline btn-lg border-primary text-primary"
               >
                 npm page <FaArrowRight />
+              </a>
+              <a
+                href="https://chromewebstore.google.com/detail/aura/likelgppeaoiocgebdepjbfmpnfncfan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline btn-lg gap-2"
+              >
+                <FaChrome />
+                Add to Chrome
               </a>
             </div>
           </div>

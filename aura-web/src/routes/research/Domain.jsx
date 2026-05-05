@@ -28,16 +28,16 @@ export default function Domain() {
 
       <Section icon={<FaBook />} title="Literature Survey" id="literature-survey">
         <p>
-          Modern web applications are used for education, healthcare, banking, communication, e-commerce, and public services. However, many websites still follow a fixed interface design that assumes all users interact with digital systems in the same way. This creates difficulties for users with visual limitations, motor impairments, color vision deficiencies, and lower levels of digital literacy.
+          Modern web applications are used for education, healthcare, banking, communication, e-commerce, and public services. However, many websites still follow a fixed interface design that assumes all users interact with digital systems in the same way. This creates difficulties for users with visual limitations, motor impairments, color vision deficiencies, and lower levels of digital literacy. Global reports show that internet use is widespread, while disability, visual impairment, and literacy barriers continue to affect a large number of users worldwide [1]–[4].
         </p>
         <p className="mt-4">
-          Existing accessibility solutions such as font resizing, high-contrast modes, screen readers, and keyboard navigation provide important support for inclusive design. Standards such as the Web Content Accessibility Guidelines also help developers create more accessible systems. However, many of these solutions depend on manual configuration and do not automatically adapt to the changing needs of individual users.
+          Existing accessibility solutions such as font resizing, high-contrast modes, screen readers, and keyboard navigation provide important support for inclusive design. Standards such as the Web Content Accessibility Guidelines help developers create more accessible systems by focusing on perceivable, operable, understandable, and robust web content [5]. However, many accessibility solutions still depend on manual configuration and do not automatically adapt to the changing needs of individual users.
         </p>
         <p className="mt-4">
-          Recent research in Human–Computer Interaction and Artificial Intelligence has explored adaptive interfaces that respond to user behavior. Studies show that interaction patterns such as mouse movement, click accuracy, scrolling behavior, reaction time, and navigation patterns can provide useful signals about user difficulties. Gamified onboarding tasks have also been used to assess visual perception, motor coordination, and digital literacy in a structured way.
+          Recent research in Human–Computer Interaction and Artificial Intelligence has explored adaptive interfaces that respond to user behavior. Prior studies suggest that interaction patterns such as mouse movement, click accuracy, scrolling behavior, reaction time, and navigation patterns can provide useful signals about user difficulties [6]. Gamified and task-based assessment methods have also been used to evaluate visual perception, motor coordination, and digital literacy in a structured way [7].
         </p>
         <p className="mt-4">
-          Machine learning techniques have further improved adaptive personalization by enabling systems to infer user needs and recommend suitable interface changes. Reinforcement learning and clustering methods have also been applied to optimize interface behavior over time. However, many existing systems focus mainly on engagement or performance rather than accessibility. In addition, most solutions do not combine user profiling, real-time behavioral tracking, adaptive UI rendering, and developer-friendly implementation into one complete system.
+          Machine learning techniques have further improved adaptive personalization by enabling systems to infer user needs and recommend suitable interface changes. Systems such as SUPPLE have shown that user interfaces can be automatically generated or adapted based on user abilities, preferences, tasks, and device characteristics [8]. Reinforcement learning and clustering methods have also been applied to optimize interface behavior over time. However, many existing systems focus mainly on engagement or performance rather than accessibility. In addition, most solutions do not combine user profiling, real-time behavioral tracking, adaptive UI rendering, and developer-friendly implementation into one complete system.
         </p>
         <p className="mt-4">
           Therefore, the literature shows a strong need for an intelligent and scalable adaptive web interface framework that can support users with diverse visual, motor, and literacy needs in real time.
@@ -201,7 +201,7 @@ export default function Domain() {
       <Section icon={<FaCode />} title="Technologies Used" id="technologies">
         <div className="space-y-10">
           {RESEARCH_TECHNOLOGIES.map((tech) => (
-            <div key={tech.title} className="pb-8 border-b border-base-200 last:border-0">
+            <div key={tech.title} className="pb-8 border-b border-primary/40 last:border-0">
               <h4 className="font-bold text-base-content mb-5 flex items-center gap-3 text-lg">
                 <div className="w-2 h-2 rounded-full bg-primary" />
                 {tech.title}
@@ -210,7 +210,7 @@ export default function Domain() {
                 {tech.items.map((item) => (
                   <span 
                     key={item} 
-                    className="px-3 py-1 rounded-full bg-base-100 text-base-content/70 text-xs font-semibold border border-base-300 hover:bg-base-300 transition-colors"
+                    className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/40"
                   >
                     {item}
                   </span>
@@ -219,6 +219,35 @@ export default function Domain() {
             </div>
           ))}
         </div>
+      </Section>
+
+      <Section icon={<FaBook />} title="References" id="references">
+        <ol className="list-decimal pl-5 space-y-4 text-sm text-base-content/80">
+          <li>
+            International Telecommunication Union, “Internet use,” Facts and Figures 2025, 2025. [Online]. Available: ITU website. Accessed: May 6, 2026.
+          </li>
+          <li>
+            World Health Organization, “Disability and health,” 2023. [Online]. Available: WHO website. Accessed: May 6, 2026.
+          </li>
+          <li>
+            World Health Organization, “Blindness and vision impairment,” 2026. [Online]. Available: WHO website. Accessed: May 6, 2026.
+          </li>
+          <li>
+            UNESCO, “Literacy,” 2025. [Online]. Available: UNESCO website. Accessed: May 6, 2026.
+          </li>
+          <li>
+            World Wide Web Consortium, “Web Content Accessibility Guidelines (WCAG) 2.2,” W3C Recommendation, 2024. [Online]. Available: W3C website. Accessed: May 6, 2026.
+          </li>
+          <li>
+            F. Hwang, S. Keates, P. Langdon, and J. Clarkson, “Mouse movements of motion-impaired users: A submovement analysis,” in Proc. 6th International ACM SIGACCESS Conference on Computers and Accessibility, 2004, pp. 102–109.
+          </li>
+          <li>
+            B. Youngmann, L. Allerhand, E. Yom-Tov, and D. Arkadir, “A machine learning algorithm successfully screens for Parkinson’s in web users,” Annals of Clinical and Translational Neurology, vol. 6, no. 12, pp. 2503–2511, 2019.
+          </li>
+          <li>
+            K. Z. Gajos, D. S. Weld, and J. O. Wobbrock, “Automatically generating personalized user interfaces with SUPPLE,” Artificial Intelligence, vol. 174, no. 12–13, pp. 910–950, 2010.
+          </li>
+        </ol>
       </Section>
 
       <footer className="mt-20 pt-8 border-t border-base-300">
