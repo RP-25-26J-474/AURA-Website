@@ -157,7 +157,7 @@ export default function Pricing() {
             </div>
             <ul className="space-y-2 flex-1 text-sm text-base-content/65">
               {[
-                "Free npm package — all 19 components",
+                "Free npm package — all 20 components",
                 "Default components work without a license",
                 "License required to unlock adaptiveness",
                 "License required for production deployment",

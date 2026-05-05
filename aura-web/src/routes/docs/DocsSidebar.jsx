@@ -41,6 +41,7 @@ const sections = [
       { label: "AdaptiveCard", to: "/docs/components/adaptive-card" },
       { label: "AdaptiveTable", to: "/docs/components/adaptive-table" },
       { label: "AdaptiveList", to: "/docs/components/adaptive-list" },
+      { label: "AdaptiveImageFilter", to: "/docs/components/adaptive-image-filter" },
     ],
   },
   {

@@ -12,6 +12,7 @@ import adaptiveInput from "./components/adaptive-input.md?raw";
 import adaptiveLayout from "./components/adaptive-layout.md?raw";
 import adaptiveModal from "./components/adaptive-modal.md?raw";
 import adaptiveTable from "./components/adaptive-table.md?raw";
+import adaptiveImageFilter from "./components/adaptive-image-filter.md?raw";
 
 export const docsMap = {
   // Introduction
@@ -48,4 +49,7 @@ export const docsMap = {
   "components/adaptive-dialog": adaptiveModal,
   "components/adaptive-drawer": adaptiveModal,
   "components/adaptive-tooltip": adaptiveModal,
+
+  // Media
+  "components/adaptive-image-filter": adaptiveImageFilter,
 };

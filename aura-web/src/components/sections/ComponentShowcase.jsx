@@ -16,6 +16,7 @@ const components = [
     "AdaptiveDrawer",
     "AdaptiveDropdown",
     "AdaptiveGrid",
+    "AdaptiveImageFilter",
     "AdaptiveInput",
     "AdaptiveList",
     "AdaptiveMenu",
