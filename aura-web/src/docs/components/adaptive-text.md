@@ -1,6 +1,6 @@
 # AdaptiveText
 
-The foundational typography component. Renders any text element — headings, body, captions, labels — and automatically adjusts font size, line height, and weight based on the active personalization profile.
+A flexible typography component that adapts its size, weight, and styling according to the active personalization profile.
 
 ---
 
@@ -12,15 +12,13 @@ import { AdaptiveText } from "@aura-adaptive/aura-ui-adaptor";
 
 ---
 
-## Variants
+## Basic Usage
 
 ```jsx
-<AdaptiveText variant="h1">Page Title</AdaptiveText>
-<AdaptiveText variant="h2">Section Heading</AdaptiveText>
-<AdaptiveText variant="h3">Sub-heading</AdaptiveText>
-<AdaptiveText variant="body">Body paragraph text.</AdaptiveText>
-<AdaptiveText variant="caption">Small helper text</AdaptiveText>
-<AdaptiveText variant="label">Form label</AdaptiveText>
+<AdaptiveText variant="h1">Hello World</AdaptiveText>
+<AdaptiveText variant="body" align="center" muted>
+  This text adapts to user preferences.
+</AdaptiveText>
 ```
 
 ---
@@ -29,37 +27,48 @@ import { AdaptiveText } from "@aura-adaptive/aura-ui-adaptor";
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"h1" \| "h2" \| "h3" \| "body" \| "caption" \| "label"` | `"body"` | Semantic and visual variant |
-| `as` | `string` | — | Override the HTML element (e.g. `as="span"`) |
-| `children` | `ReactNode` | — | Text content |
-| `className` | `string` | — | Additional classes |
+| `variant` | `"display" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "lead" \| "body" \| "caption" \| "overline" \| "code"` | `"body"` | Semantic styling variant |
+| `as` | `string` | — | Overrides the default HTML tag (e.g., render an `h1` variant as a `div`) |
+| `align` | `"left" \| "center" \| "right" \| "justify"` | `"left"` | Text alignment |
+| `weight` | `"normal" \| "medium" \| "semibold" \| "bold"` | Auto | Text weight (defaults based on variant) |
+| `muted` | `boolean` | `false` | Renders the text in a secondary, lower-contrast color |
+| `underline` | `boolean` | `false` | Adds text underline |
+| `strike` | `boolean` | `false` | Adds text strikethrough |
+| `truncate` | `boolean` | `false` | Truncates text with an ellipsis (`...`) if it overflows a single line |
+| `maxLines` | `number` | — | Clamps text to a maximum number of lines (best-effort using `-webkit-line-clamp`) |
+| `className` | `string` | — | Additional CSS classes |
+| `style` | `CSSProperties` | — | Additional inline styles |
 
 ---
 
 ## Adaptive Behavior
 
-| Profile | Adaptation |
-|---------|------------|
-| Visual impairment | Larger base font size, increased line height |
-| Low literacy | Simplified weight, wider letter spacing |
-| Motor (no text change) | Not applicable |
+`AdaptiveText` automatically responds to token changes from the `AdaptiveProvider`:
+- **Typography Scale**: The `typography.baseSize` controls the font size mathematically. For example, if a user profile requests larger fonts, `AdaptiveText` recalculates `h1`, `body`, and `caption` relative to the newly injected base size.
+- **Visual Impairments**: If `highContrast` is enabled, the `muted` prop falls back to the high-contrast primary text color to guarantee readability.
+- **Analytics**: Clicking the text triggers behavior tracking. `Alt + Click` opens the manual component feedback modal.
 
 ---
 
-## Example
+## Full Example
 
 ```jsx
 import { AdaptiveProvider, AdaptiveText } from "@aura-adaptive/aura-ui-adaptor";
 
-function Article() {
+function ArticleHeader() {
   return (
     <AdaptiveProvider>
-      <AdaptiveText variant="h1">Understanding Accessibility</AdaptiveText>
-      <AdaptiveText variant="body">
-        Adaptive UI ensures your content reaches every user effectively,
-        regardless of their individual needs.
-      </AdaptiveText>
-      <AdaptiveText variant="caption">Last updated: March 2026</AdaptiveText>
+      <header>
+        <AdaptiveText variant="overline" muted>
+          Technology
+        </AdaptiveText>
+        <AdaptiveText variant="h1" align="center">
+          The Future of Web Interfaces
+        </AdaptiveText>
+        <AdaptiveText variant="lead" truncate>
+          We are moving towards intelligent, dynamically rendering web layouts...
+        </AdaptiveText>
+      </header>
     </AdaptiveProvider>
   );
 }
