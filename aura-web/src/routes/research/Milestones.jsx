@@ -4,7 +4,7 @@ import { RESEARCH_MILESTONES } from "../../constants/research";
 const StatusBadge = ({ status }) => {
   switch (status) {
     case "completed":
-      return <span className="badge badge-success badge-sm gap-1 text-[10px] font-bold uppercase"><FaCircleCheck /> Completed</span>;
+      return <span className="badge badge-primary badge-sm gap-1 text-[10px] font-bold uppercase"><FaCircleCheck /> Completed</span>;
     case "in-progress":
       return <span className="badge badge-warning badge-sm gap-1 text-[10px] font-bold uppercase"><FaCircleDot /> In Progress</span>;
     default:
