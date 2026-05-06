@@ -1,8 +1,19 @@
 import { FaFilePdf, FaLock, FaArrowDown } from "react-icons/fa6";
 import { RESEARCH_DOCUMENTS } from "../../constants/research";
 
+const getDownloadUrl = (url) => {
+  if (!url) return "";
+  const fileIdMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (fileIdMatch && fileIdMatch[1]) {
+    return `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`;
+  }
+  return url;
+};
+
 const DocCard = ({ doc }) => {
   const isLocked = !doc.url && doc.status === "locked";
+  const downloadUrl = getDownloadUrl(doc.url);
+  const isFolder = doc.url && doc.url.includes("/folders/");
   
   return (
     <div className="group p-6 rounded-3xl bg-base-100 border border-primary/40 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between">
@@ -20,13 +31,16 @@ const DocCard = ({ doc }) => {
         </button>
       ) : (
         <a 
-          href={doc.url} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          href={downloadUrl} 
+          download={!isFolder}
+          target={isFolder ? "_blank" : undefined} 
+          rel={isFolder ? "noopener noreferrer" : undefined} 
           className="btn btn-block btn-sm btn-primary gap-2"
         >
           <FaArrowDown className="text-[10px]" /> 
-          <span className="text-[11px] font-bold uppercase tracking-tight">View / Download</span>
+          <span className="text-[11px] font-bold uppercase tracking-tight">
+            {isFolder ? "View Folder" : "Download"}
+          </span>
         </a>
       )}
     </div>

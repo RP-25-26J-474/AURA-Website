@@ -23,7 +23,7 @@ export const RESEARCH_MILESTONES = [
 
 export const RESEARCH_DOCUMENTS = [
     { title: "Project Charter", status: "available", url: "https://drive.google.com/file/d/1ZoNtzcvEEZI6K8w6-I3SD4ElhITsGUwd/view?usp=sharing" },
-    { title: "Proposal Documents", status: "available", url: "https://drive.google.com/drive/folders/1h4KSu76m2nqZN0Dbgx5N9shqS_WCIswk?usp=sharing" },
+    { title: "Proposal Report", status: "available", url: "https://drive.google.com/file/d/1isG892CdmuNLfhsiXyDiyIiNMTf2pf5o/view?usp=sharing" },
     { title: "Checklist 1 - Github Repositories", status: "available", url: "https://drive.google.com/file/d/1SCNchIudTsvnB9dVYnff-SUZ9cRfQnpu/view?usp=sharing" },
     { title: "Checklist 2 - UI/UX Demo Video", status: "available", url: "https://drive.google.com/file/d/1A0alorxG699MHp2B2KpRfXG-RnCDS2Mb/view?usp=sharing" },
     { title: "Checklist 3 - Deployment Report", status: "available", url: "https://drive.google.com/file/d/1qbCDW3SmQ_ojoD0wWGarnLyaNdEmOMsF/view?usp=sharing" },
