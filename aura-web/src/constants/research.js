@@ -27,7 +27,7 @@ export const RESEARCH_DOCUMENTS = [
     { title: "Checklist 1 - Github Repositories", status: "available", url: "https://drive.google.com/file/d/1SCNchIudTsvnB9dVYnff-SUZ9cRfQnpu/view?usp=sharing" },
     { title: "Checklist 2 - UI/UX Demo Video", status: "available", url: "https://drive.google.com/file/d/1A0alorxG699MHp2B2KpRfXG-RnCDS2Mb/view?usp=sharing" },
     { title: "Checklist 3 - Deployment Report", status: "available", url: "https://drive.google.com/file/d/1qbCDW3SmQ_ojoD0wWGarnLyaNdEmOMsF/view?usp=sharing" },
-    { title: "Final Document", status: "locked", url: "" },
+    { title: "Final Document", status: "available", url: "https://drive.google.com/file/d/127nl-7quAfEVEIqH-90idrR4d2H4OgOo/view?usp=sharing" },
 ];
 
 export const RESEARCH_PRESENTATIONS = [
@@ -51,7 +51,7 @@ export const RESEARCH_PRESENTATIONS = [
         status: "available",
         url: "https://drive.google.com/file/d/1JFoAtV2fmRvEQ-DAQeRLrzcS2Jl3475f/view?usp=sharing"
     },
-    { title: "Final Presentation", status: "locked", size: "12.5 MB", url: "" },
+    { title: "Final Presentation", status: "available", url: "https://drive.google.com/file/d/1H5ZKLcDy2meWBz_3x_FeIQu9KQk8_tCG/view?usp=sharing" },
 ];
 
 export const RESEARCH_TECHNOLOGIES = [
